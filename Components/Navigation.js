@@ -1,20 +1,17 @@
-import * as React from "react";
-import { View, Text, Pressable } from "react-native";   
-import {useNavigation} from "@react-navigation/native"
+import * as React from "react"; 
+
+
+
+const Drawer = createDrawerNavigator();
 
 export const Navigation = () => {
-    const navigation = useNavigation()
   return (
-    <View>
-      <Pressable onPress={() => navigation.navigate("Home")}>
-        <Text>Home</Text>
-      </Pressable>
-      <Pressable onPress={() => navigation.navigate("Recommendations")}>
-        <Text>Recommendations</Text>
-      </Pressable>
-      <Pressable onPress={() => navigation.navigate("Profile")}>
-        <Text>Profile</Text>
-      </Pressable>
-    </View>
+    <>
+      <Drawer.Navigator>
+          <Drawer.Screen name="Home" component={Home} />
+          <Drawer.Screen name="Recommendations" component={Recommendations} />
+          <Drawer.Screen name="Profile" component={Profile} />
+      </Drawer.Navigator>
+    </>
   );
 };

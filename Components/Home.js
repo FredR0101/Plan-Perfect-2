@@ -1,31 +1,19 @@
-import { useState } from 'react'
-import { StyleSheet, Text, View, Pressable } from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Itinerary } from './Itinerary'
+import { AddActivity } from './AddActivity';
+import { ShareItinerary } from './ShareItinerary'
 
-export default function Home ({navigation}) {
-    const [userItinerary, setUserItinerary] = useState([])
+export const Home = ({navigation}) => {
+    const Tab = createBottomTabNavigator();
     return (
         <>
-        <View style={styles.itinerary}>
-            <Text style={{marginTop: "5%", fontSize: "120%", fontWeight: "bold",}}> My Itinerary </Text>
-            { userItinerary.length === 0 ? <Text> Empty Itinerary </Text>  : <Text> Itinerary </Text>  }
-            <Pressable style = {{border: "2px solid black", boxShadow: "1px 2px 5px black"}} onPress = {() => {navigation.navigate("AddActivity")}}> 
-                <Text>  Add Activity </Text>
-            </Pressable>
-            <Pressable style = {{border: "2px solid black", boxShadow: "1px 2px 5px black", alignSelf: "flex-end"}} > 
-                <Text>  Share Itinerary </Text>
-            </Pressable>
-        </View>
+        <Tab.Navigator screenOptions={{headerShown: false}} initialRouteName='Itinerary'>
+            <Tab.Screen name="My Itinerary" component={Itinerary}/>
+            <Tab.Screen name="Add Activity" component={AddActivity}/>
+            <Tab.Screen name="Share Itinerary" component={ShareItinerary}/>
+        </Tab.Navigator>
         </>
     )
 }
 
-export const styles = StyleSheet.create({
-    itinerary: {
-      backgroundColor: "lightgrey",
-      flex: 1,
-      width: "90%",
-      alignItems: "center",
-      border: "1px solid black"
-    }
-  });
 
