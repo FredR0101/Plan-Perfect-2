@@ -1,5 +1,8 @@
 import * as React from "react"; 
-
+import {createDrawerNavigator} from '@react-navigation/drawer'
+import { Home } from "./Home";
+import {Recommendations} from './Recommendations'
+import {Profile} from './Profile'
 
 
 const Drawer = createDrawerNavigator();

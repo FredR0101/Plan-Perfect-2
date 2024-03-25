@@ -13,7 +13,7 @@ const LoginPage = () => {
     useEffect(()=> {
         const unsubscribe = auth.onAuthStateChanged((user)=> {
             if(user){
-                navigation.replace("Home")
+                navigation.replace("Nav")
             }
         })
         return unsubscribe
@@ -21,15 +21,15 @@ const LoginPage = () => {
     const handleSignUp = () => {
         createUserWithEmailAndPassword(auth, email, password).then((userCred)=> {
             const user = userCred.user
-            console.log("registed with", user.email)
+            console.log("registered with", user.email)
         }).catch((err) => {
             alert(err.message)
         })
     }
     const handleLogin = () => {
-        signInWithEmailAndPassword(auth, email, password).then(()=> {
+        signInWithEmailAndPassword(auth, email, password).then((userCred)=> {
             const user = userCred.user
-            console.log("loged in  with", user.email);
+            console.log("logged in  with", user.email);
         }).catch((err)=> {
             alert(err)
         })
