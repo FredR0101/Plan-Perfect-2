@@ -13,7 +13,7 @@ const LoginPage = () => {
     useEffect(()=> {
         const unsubscribe = auth.onAuthStateChanged((user)=> {
             if(user){
-                navigation.replace()
+                navigation.replace("Home")
             }
         })
         return unsubscribe
