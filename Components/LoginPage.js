@@ -21,7 +21,6 @@ const LoginPage = () => {
     const handleSignUp = () => {
         createUserWithEmailAndPassword(auth, email, password).then((userCred)=> {
             const user = userCred.user
-            console.log("registered with", user.email)
         }).catch((err) => {
             alert(err.message)
         })
@@ -29,7 +28,6 @@ const LoginPage = () => {
     const handleLogin = () => {
         signInWithEmailAndPassword(auth, email, password).then((userCred)=> {
             const user = userCred.user
-            console.log("logged in  with", user.email);
         }).catch((err)=> {
             alert(err)
         })
