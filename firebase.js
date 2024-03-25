@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getFireStore } from "firebase/firestore";
+import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { Key } from './ApiKey'
 
@@ -22,4 +22,4 @@ export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 
 // //database fetch
-// export const db = getFireStore();
+export const db = getFirestore();
