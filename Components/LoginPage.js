@@ -1,8 +1,8 @@
  import { StyleSheet, View, Text, Pressable} from "react-native";
  import React, {useEffect, useState } from "react";
- import { KeyboardAvoidingView, TextInput, TouchableOpacity} from "react-native-web";
+ import { KeyboardAvoidingView, TextInput } from "react-native-web";
  import {auth} from "../firebase"
- import {createUserWithEmailAndPassword, signInWithEmailAndPassword} from "firebase/auth"
+ import { signInWithEmailAndPassword } from "firebase/auth"
  import {useNavigation} from "@react-navigation/native"
 
 const LoginPage = () => {
@@ -19,11 +19,7 @@ const LoginPage = () => {
         return unsubscribe
     },[])
     const handleSignUp = () => {
-        createUserWithEmailAndPassword(auth, email, password).then((userCred)=> {
-            const user = userCred.user
-        }).catch((err) => {
-            alert(err.message)
-        })
+        navigation.replace("SignUp")
     }
     const handleLogin = () => {
         signInWithEmailAndPassword(auth, email, password).then((userCred)=> {
@@ -54,7 +50,7 @@ const LoginPage = () => {
                 <Text style={styles.btntext}>Log in</Text>
             </Pressable>
             <Pressable style={[styles.btn, styles.buttonOutline]} onPress={handleSignUp} >
-                <Text style={styles.buttonOutlineText}>Sign up</Text>
+                <Text style={styles.buttonOutlineText}>Sign up here!</Text>
             </Pressable>
         </View>
         </KeyboardAvoidingView>

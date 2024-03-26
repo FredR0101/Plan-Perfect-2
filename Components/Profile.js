@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, Image } from "react-native";
 import * as React from "react";
 import { auth } from "../firebase";
 import { Pressable } from "react-native-web";
@@ -38,8 +38,9 @@ export const Profile = () => {
 
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      {user.length > 0  && <Text>{user[0].username}</Text>}
-      {user.length > 0  && <Text>{user[0].email}</Text>}
+      {user.length > 0  && <Image source={{ uri: user[0].image }} style={styles.profileImage}/>}
+      {user.length > 0  && <Text style={styles.text}>{user[0].username}</Text>}
+      {user.length > 0  && <Text style={styles.text}>{user[0].email}</Text>}
       
       <Pressable style={styles.button} onPress={handleSignout}>
         <Text style={styles.buttonText}>Sign out</Text>
@@ -54,11 +55,20 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 10,
     alignItems: "center",
-    marginTop: 300,
+    marginTop: 200,
   },
   buttonText: {
     color: "white",
     fontWeight: "700",
     fontSize: 16,
   },
+  profileImage: {
+    height: "35%",
+    width: "35%",
+    borderRadius: 200,
+    marginBottom: 15
+  },
+  text: {
+    marginBottom: 10
+  }
 });
