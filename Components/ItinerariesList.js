@@ -1,11 +1,14 @@
-import { View, Text } from "react-native"
+import { View, Text, StyleSheet, Pressable } from "react-native"
 import { db } from "../firebase"
-import {doc, getDocs, collection, query, where} from 'firebase/firestore'
+import { doc, getDocs, collection, query, where } from 'firebase/firestore'
 import { useEffect, useState } from "react"
+import { useNavigation } from "@react-navigation/native";
+
 
 export const itinerariesList = () => {
 
     const [itinerary, setItinerary] = useState([])
+    const [activity, setActivity] = useState([])
 
     useEffect(() => {
         const fetchData = collection(db, "test-itineraries")
@@ -17,26 +20,30 @@ export const itinerariesList = () => {
             setItinerary(itineraryData)
         })
 
-
-        // if (docSnap.exists()) {
-        //     console.log("Document data:", docSnap.data());
-        //   } else {
-        //     // docSnap.data() will be undefined in this case
-        //     console.log("No such document!");
-        //   }
-
     }, [])
+
+
+    const navigation = useNavigation()
+
+
     return (
         <>
-            <Text>Your Itineraries</Text>
+            <Text>My Trips</Text>
 
-            <View>
+            <View style={styles.container}>
                 {itinerary.map((data) => {
                     return (
-                        <View key={data.id}>
-                            <Text>Name: {data.name} </Text>
-                            <Text>Location: {data.location}</Text>
-                            <Text>Dates: {data.startDate} to {data.endDate}</Text>
+                        <View style={styles.card} key={data.id}>
+                            <Pressable onPress={() => {
+                                navigation.navigate('Recommendations', {
+                                    screen: 'My Itinerary',
+                                    params: { id: data.id }
+                                })
+                            }}>
+                                <Text>Name: {data.name} </Text>
+                                <Text>Location: {data.location}</Text>
+                                <Text>Dates: {data.startDate} to {data.endDate}</Text>
+                            </Pressable>
                         </View>
                     )
                 })}
@@ -46,4 +53,20 @@ export const itinerariesList = () => {
 
 
     )
+
 }
+
+const styles = StyleSheet.create({
+    container: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 50
+    },
+    card: {
+        marginBottom: 50,
+        borderRadius: 12,
+        borderWidth: 2,
+        borderColor: '#7fffd4',
+        padding: 20
+    }
+})

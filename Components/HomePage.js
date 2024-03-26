@@ -16,8 +16,8 @@ export const HomePage = ({navigation}) => {
         <>
             
             <Tab.Navigator screenOptions={{headerShown: false}} initialRouteName='ItinerariesList'>
-            <Tab.Screen name="Itineraries" component={itinerariesList}/>
-            <Tab.Screen name="Add Itinerary" component={AddItinerary}/>
+            <Tab.Screen name="My Trips" component={itinerariesList}/>
+            <Tab.Screen name="Add Trip" component={AddItinerary}/>
             </Tab.Navigator>
 
         </>
