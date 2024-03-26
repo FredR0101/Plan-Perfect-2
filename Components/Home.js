@@ -9,7 +9,7 @@ export const Home = () => {
         <>
         <Tab.Navigator screenOptions={{headerShown: false}} initialRouteName='Itinerary'>
             <Tab.Screen name="My Itinerary" component={Itinerary}/>
-            <Tab.Screen name="Add Activity" component={AddActivity}/>
+            <Tab.Screen name="Add Activity" component={AddActivity }/>
             <Tab.Screen name="Share Itinerary" component={ShareItinerary}/>
         </Tab.Navigator>
         </>

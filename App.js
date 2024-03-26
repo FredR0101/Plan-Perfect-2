@@ -6,6 +6,7 @@ import LoginPage from "./Components/LoginPage";
 import { Navigation } from "./Components/Navigation";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
+
 const Stack = createNativeStackNavigator();
 
 export default function App() {
