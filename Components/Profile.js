@@ -13,20 +13,21 @@ export const Profile = () => {
   useEffect(() => {
     const userEmail = auth.currentUser.email;
     const fetchData = collection(db, "test-users");
-    const userQuery = query(fetchData, where("email", "==", userEmail));
+    const userQuery = query(fetchData, where("email", "==", userEmail))
     getDocs(userQuery)
       .then((usersData) => {
         let user = [];
         usersData.docs.forEach((doc) => {
           user.push({ ...doc.data(), id: doc.id });
         });
+        console.log(user)
         setUser(user);
       })
       .catch((err) => {
         throw err;
       });
   }, []);
-
+  
   const handleSignout = () => {
     auth
       .signOut()
@@ -34,9 +35,6 @@ export const Profile = () => {
         navigation.replace("Login");
       })
       .catch((error) => alert(error.message));
-  };
-  const handleEdit = () => {
-    navigation.replace("EditUser");
   };
 
   return (

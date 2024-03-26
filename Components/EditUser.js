@@ -1,22 +1,26 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { TextInput } from "react-native-web";
 import React, { useState } from "react";
-import { updateEmail } from "firebase/auth";
+
 import { auth } from "../firebase";
+import{ db } from "../firebase"
+import {updateDoc, doc} from 'firebase/firestore'
+
 const EditUser = () => {
   const [image, setImage] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const handleSubmit = () => {
-    const user = auth.currentUser
-    updateEmail(user, email).then(() => {
-      console.log("Email updated successfully")
+    const uid = auth.currentUser.uid
+    const ref = doc(db, "test-users", uid)
+   
+   updateDoc(ref, { username: username } ).then(() => {
+      alert("Username successfully changed")
+   }).catch((err)=> {
+      alert(err,"Something went wrong")
     })
 }
-const update = {
-  username: username,
-  image: image
-}
+
   return (
     <View>
       <TextInput

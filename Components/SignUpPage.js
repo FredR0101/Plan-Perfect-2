@@ -1,10 +1,10 @@
 import { StyleSheet, View, Text, Pressable } from "react-native";
 import React, { useEffect, useState } from "react";
 import { auth } from "../firebase";
-import { addDoc, collection } from "firebase/firestore";
+import { setDoc, collection, doc } from "firebase/firestore";
 import { KeyboardAvoidingView, TextInput } from "react-native-web";
 import { useNavigation } from "@react-navigation/native";
-import {createUserWithEmailAndPassword} from "firebase/auth"
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { db } from "../firebase";
 
 const SignUp = () => {
@@ -18,24 +18,27 @@ const SignUp = () => {
   const handleSignUp = () => {
     createUserWithEmailAndPassword(auth, email, password, image)
       .then((userCred) => {
-        const user = userCred.user;
-        addToDatabase()
+        const user = userCred.user.uid;
+        addToDatabase(user);
       })
       .catch((err) => {
         alert(err.message);
       });
   };
 
-  const addToDatabase = () => {
-    addDoc(collection(db, "test-users"), {
+  const addToDatabase = (user) => {
+    const data = {
       username: username,
       email: email,
       image: image,
-    }).then(() => {
-        navigation.replace('Nav')
-    }).catch((error) => {
-      alert(error);
-    });
+    };
+    setDoc(doc(db, "test-users", user), data)
+      .then(() => {
+        navigation.replace("Nav");
+      })
+      .catch((error) => {
+        alert(error);
+      });
   };
 
   const backToLogin = () => {
