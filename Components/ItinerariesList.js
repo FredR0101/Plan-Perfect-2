@@ -28,8 +28,6 @@ export const itinerariesList = () => {
 
     return (
         <>
-            <Text>My Trips</Text>
-
             <View style={styles.container}>
                 {itinerary.map((data) => {
                     return (

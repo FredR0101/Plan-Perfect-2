@@ -11,7 +11,7 @@ export const Navigation = () => {
   return (
     <>
       <Drawer.Navigator>
-          <Drawer.Screen name="Home" component={HomePage} />
+          <Drawer.Screen name="My Trips" component={HomePage} />
           <Drawer.Screen name="Recommendations" component={Recommendations} />
           <Drawer.Screen name="Profile" component={Profile} />
       </Drawer.Navigator>
