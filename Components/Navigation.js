@@ -5,6 +5,7 @@ import {Recommendations} from './Recommendations'
 import {MainProfile} from "./MainProfile"
 
 
+
 const Drawer = createDrawerNavigator();
 
 export const Navigation = () => {

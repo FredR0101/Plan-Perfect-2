@@ -8,6 +8,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import SignUp from "./Components/SignUpPage";
 import EditUser from "./Components/EditUser";
 
+
 const Stack = createNativeStackNavigator();
 
 export default function App() {
