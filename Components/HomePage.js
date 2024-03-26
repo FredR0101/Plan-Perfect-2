@@ -7,8 +7,19 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { itinerariesList } from "./ItinerariesList"
 
 
-export const HomePage = () => {
+export const HomePage = ({navigation}) => {
+   
+      
+
+    const Tab = createBottomTabNavigator();
     return (
-        <Text>Hello!</Text>
+        <>
+            
+            <Tab.Navigator screenOptions={{headerShown: false}} initialRouteName='ItinerariesList'>
+            <Tab.Screen name="My Trips" component={itinerariesList}/>
+            <Tab.Screen name="Add Trip" component={AddItinerary}/>
+            </Tab.Navigator>
+
+        </>
     )
 }
