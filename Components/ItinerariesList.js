@@ -35,7 +35,7 @@ export const itinerariesList = () => {
                             <Pressable onPress={() => {
                                 navigation.navigate('Recommendations', {
                                     screen: 'My Itinerary',
-                                    params: { id: data.id }
+                                    params: { itineraryId: data.id }
                                 })
                             }}>
                                 <Text>Name: {data.name} </Text>
