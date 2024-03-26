@@ -6,6 +6,7 @@ import LoginPage from "./Components/LoginPage";
 import { Navigation } from "./Components/Navigation";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import SignUp from "./Components/SignUpPage";
+import EditUser from "./Components/EditUser";
 
 const Stack = createNativeStackNavigator();
 
@@ -25,11 +26,16 @@ export default function App() {
             name="SignUp"
             component={SignUp}
           />
-          <Stack.Screen
-            options={{ headerShown: false }}
-            name="Nav"
-            component={Navigation}
-          />
+             <Stack.Screen
+               options={{ headerShown: false }}
+               name="Nav"
+               component={Navigation}
+             />
+            <Stack.Screen
+             options={{ headerShown: false }}
+             name="EditUser"
+             component={EditUser}
+           />
           <Stack.Screen
             options={{ headerShown: false }}
             name="Home"

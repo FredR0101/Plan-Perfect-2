@@ -18,14 +18,14 @@ export const Profile = () => {
       .then((usersData) => {
         let user = [];
         usersData.docs.forEach((doc) => {
-          user.push({...doc.data(), id: doc.id });
+          user.push({ ...doc.data(), id: doc.id });
         });
         setUser(user);
       })
       .catch((err) => {
         throw err;
       });
-    }, []);
+  }, []);
 
   const handleSignout = () => {
     auth
@@ -35,13 +35,21 @@ export const Profile = () => {
       })
       .catch((error) => alert(error.message));
   };
+  const handleEdit = () => {
+    navigation.replace("EditUser");
+  };
 
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      {user.length > 0  && <Image source={{ uri: user[0].image }} style={styles.profileImage}/>}
-      {user.length > 0  && <Text style={styles.text}>{user[0].username}</Text>}
-      {user.length > 0  && <Text style={styles.text}>{user[0].email}</Text>}
-      
+      {user.length > 0 && (
+        <Image source={{ uri: user[0].image }} style={styles.profileImage} />
+      )}
+      {user.length > 0 && (
+        <Text style={styles.text}>Username: {user[0].username}</Text>
+      )}
+      {user.length > 0 && (
+        <Text style={styles.text}>Email: {user[0].email}</Text>
+      )}
       <Pressable style={styles.button} onPress={handleSignout}>
         <Text style={styles.buttonText}>Sign out</Text>
       </Pressable>
@@ -55,7 +63,7 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 10,
     alignItems: "center",
-    marginTop: 200,
+    marginTop: 10,
   },
   buttonText: {
     color: "white",
@@ -63,12 +71,13 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   profileImage: {
-    height: "35%",
-    width: "35%",
+    height: "10%",
+    width: "25%",
     borderRadius: 200,
-    marginBottom: 15
+    marginBottom: 15,
   },
   text: {
-    marginBottom: 10
-  }
+    marginBottom: 10,
+    fontSize: 16,
+  },
 });
