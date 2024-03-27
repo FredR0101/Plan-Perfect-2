@@ -1,12 +1,14 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { KeyboardAvoidingView, TextInput } from "react-native-web";
 import React, { useState } from "react";
-
+import { deleteUser } from "firebase/auth";
 import { auth } from "../firebase";
 import { db } from "../firebase";
-import { updateDoc, doc } from "firebase/firestore";
+import { updateDoc, doc, deleteDoc } from "firebase/firestore";
+import { useNavigation } from "@react-navigation/native";
 
 const EditUser = () => {
+  const navigation = useNavigation()
   const [image, setImage] = useState("");
   const [username, setUsername] = useState("");
 
@@ -39,7 +41,28 @@ const EditUser = () => {
         alert(err, "Something went wrong");
       });
   };
-
+  const handleDocDelete = () => {
+    const uid = auth.currentUser.uid;
+    const userRef = doc(db, "test-users", uid);
+    deleteDoc(userRef)
+    .then(() => {
+      handleDelete()
+      alert("User deleted");
+    })
+    .catch((err) => {
+      alert(err, "Something went wrong");
+    });
+  };
+  const handleDelete = () => {
+    const user = auth.currentUser;
+      deleteUser(user)
+        .then(() => {
+          navigation.replace("Login");
+        })
+        .catch((err) => {
+          alert(err, "Something went wrong");
+        });
+  };
   return (
     <KeyboardAvoidingView style={styles.container}>
       <View style={styles.inputContainer}>
@@ -64,6 +87,11 @@ const EditUser = () => {
           <Text style={styles.btntext}>Update Image</Text>
         </Pressable>
       </View>
+      <View>
+        <Pressable onPress={handleDocDelete} style={styles.btn}>
+          <Text style={styles.btntext}>Delete profile</Text>
+        </Pressable>
+      </View>
     </KeyboardAvoidingView>
   );
 };
@@ -75,47 +103,47 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    },
-    inputContainer: {
+  },
+  inputContainer: {
     width: "80%",
     marginBottom: 20,
-    },
-    input: {
+  },
+  input: {
     backgroundColor: "white",
     paddingHorizontal: 15,
     paddingVertical: 10,
     borderRadius: 10,
     marginTop: 5,
     marginBottom: 10,
-    },
-    btn_container: {
+  },
+  btn_container: {
     width: "60%",
     justifyContent: "center",
     alignItems: "center",
     marginTop: 40,
-    },
-    btn: {
+  },
+  btn: {
     backgroundColor: "#0782F9",
     width: "70%",
     padding: 15,
     borderRadius: 10,
     left: "15%",
-    },
-    btntext: {
+  },
+  btntext: {
     color: "white",
     fontWeight: "700",
     fontSize: 16,
-    left: "15%"
-    },
-    buttonOutline: {
+    left: "15%",
+  },
+  buttonOutline: {
     backgroundColor: "white",
     marginTop: 5,
     borderColor: "#0782F9",
     borderWidth: 2,
-    },
-    buttonOutlineText: {
+  },
+  buttonOutlineText: {
     color: "#0782F9",
     fontWeight: "700",
     fontSize: 16,
-    },
+  },
 });

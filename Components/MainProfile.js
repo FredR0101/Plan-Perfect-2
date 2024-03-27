@@ -10,7 +10,7 @@ export const MainProfile = () => {
       initialRouteName="Profile"
     >
       <Tab.Screen name="My Profile" component={Profile} />
-      <Tab.Screen name="Update profile" component={EditUser} />
+      <Tab.Screen name="Profile settings" component={EditUser} />
     </Tab.Navigator>
   );
 };
