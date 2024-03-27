@@ -25,8 +25,7 @@ const LoginPage = () => {
         signInWithEmailAndPassword(auth, email, password).then((userCred)=> {
             const user = userCred.user
         }).catch((err)=> {
-            alert(err)
-        })
+            alert(err)        })
     }
     return (
         <KeyboardAvoidingView style={styles.container}> 
