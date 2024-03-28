@@ -4,7 +4,7 @@ import {doc, getDocs, collection, query, where} from 'firebase/firestore'
 import { useEffect, useState } from "react"
 import { AddItinerary } from "./AddItinerary"
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { itinerariesList } from "./ItinerariesList"
+import { ItinerariesList } from "./ItinerariesList"
 
 
 export const HomePage = ({navigation}) => {
@@ -16,7 +16,7 @@ export const HomePage = ({navigation}) => {
         <>
             
             <Tab.Navigator screenOptions={{headerShown: false}} initialRouteName='ItinerariesList'>
-            <Tab.Screen name="My Trips" component={itinerariesList}/>
+            <Tab.Screen name="My Trips" component={ItinerariesList}/>
             <Tab.Screen name="Add Trip" component={AddItinerary}/>
             </Tab.Navigator>
 

@@ -27,6 +27,10 @@ export const AddItinerary = () => {
                 location: locationText,
                 startDate: finalStartDate,
                 endDate: finalEndDate
+              }).then(() => {
+                addDoc(collection(db, "test-activities"), {
+                    activities: []
+                })
               });
         }
     }

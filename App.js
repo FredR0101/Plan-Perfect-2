@@ -1,7 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
-import { Home } from "./Components/Home";
+// import { Home } from "./Components/Home";
 import LoginPage from "./Components/LoginPage";
 import { Navigation } from "./Components/Navigation";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -37,11 +37,11 @@ export default function App() {
              name="EditUser"
              component={EditUser}
            />
-          <Stack.Screen
+          {/* <Stack.Screen
             options={{ headerShown: false }}
             name="Home"
             component={Home}
-          />
+          /> */}
         </Stack.Navigator>
       </NavigationContainer>
     </>
