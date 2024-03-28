@@ -18,7 +18,7 @@ export const ItinerariesList = () => {
       });
       setItinerary(itineraryData);
     });
-  }, []);
+  }, [itinerary]);
 
   const navigation = useNavigation();
 

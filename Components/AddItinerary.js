@@ -7,12 +7,15 @@ import { DatePickerInput } from 'react-native-paper-dates';
 import { useState } from "react";
 import { collection, addDoc } from "firebase/firestore"; 
 import { db } from "../firebase";
+import { useNavigation } from "@react-navigation/native";
 
 export const AddItinerary = () => {
     const [startDate, setStartDate] = React.useState(undefined)
     const [endDate, setEndDate] = React.useState(undefined)
     const [nameText, setNameText] = useState('')
     const [locationText, setLocationText] = useState('')
+
+    const navigation = useNavigation()
 
     const handleOnPress = () =>  {
         if (startDate){
@@ -27,7 +30,12 @@ export const AddItinerary = () => {
                 location: locationText,
                 startDate: finalStartDate,
                 endDate: finalEndDate
-              });
+              }).then(() => {
+                navigation.navigate('My Trips')
+                alert('Itinerary has been added')
+              }).catch(() => {
+                alert('Something went wrong, itinerary not added')
+              })
         }
     }
 
