@@ -14,21 +14,21 @@ export const Profile = () => {
   useEffect(() => {
     const userEmail = auth.currentUser.email;
     const fetchData = collection(db, "test-users");
-    const userQuery = query(fetchData, where("email", "==", userEmail))
+    const userQuery = query(fetchData, where("email", "==", userEmail));
     getDocs(userQuery)
       .then((usersData) => {
         let user = [];
         usersData.docs.forEach((doc) => {
           user.push({ ...doc.data(), id: doc.id });
         });
-        console.log(user)
+        console.log(user);
         setUser(user);
       })
       .catch((err) => {
         throw err;
       });
   }, []);
-  
+
   const handleSignout = () => {
     auth
       .signOut()
@@ -39,21 +39,25 @@ export const Profile = () => {
   };
 
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      {user.length > 0 && (
-        <Image source={{ uri: user[0].image }} style={styles.profileImage} />
-      )}
-      {user.length > 0 && (
-        <Text style={styles.text}>Username: {user[0].username}</Text>
-      )}
-      {user.length > 0 && (
-        <Text style={styles.text}>Email: {user[0].email}</Text>
-      )}
-      <Pressable style={styles.button} onPress={handleSignout}>
-        <Text style={styles.buttonText}>Sign out</Text>
-      </Pressable>
-      <App />
-    </View>
+    <>
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+        {user.length > 0 && (
+          <Image source={{ uri: user[0].image }} style={styles.profileImage} />
+        )}
+        {user.length > 0 && (
+          <Text style={styles.text}>Username: {user[0].username}</Text>
+        )}
+        {user.length > 0 && (
+          <Text style={styles.text}>Email: {user[0].email}</Text>
+        )}
+        <Pressable style={styles.button} onPress={handleSignout}>
+          <Text style={styles.buttonText}>Sign out</Text>
+        </Pressable>
+      </View>
+      <View>
+        <App />
+      </View>
+    </>
   );
 };
 const styles = StyleSheet.create({

@@ -4,13 +4,16 @@ import { doc, getDocs, collection, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { SingleItineraryNav } from "./SingleItineraryNav";
+import { auth } from "../firebase";
 
 export const ItinerariesList = () => {
   const [itinerary, setItinerary] = useState([]);
 
   useEffect(() => {
+    const uid = auth.currentUser.uid;
     const fetchData = collection(db, "test-itineraries");
-    getDocs(fetchData).then((data) => {
+    const userQuery = query(fetchData, where("uid", "==", uid));
+    getDocs(userQuery).then((data) => {
       const itineraryData = [];
       data.docs.forEach((doc) => {
         itineraryData.push({ ...doc.data(), id: doc.id });
