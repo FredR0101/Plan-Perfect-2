@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { View, Text, TextInput, Pressable } from "react-native";
 import { DatePickerInput } from "react-native-paper-dates";
-import { enGB, registerTranslation } from "react-native-paper-dates";
 import { db } from "../firebase";
 import { doc, updateDoc, arrayUnion } from "firebase/firestore";
+import { enGB, registerTranslation } from "react-native-paper-dates";
 registerTranslation("en-GB", enGB);
 
-export const AddActivity = () => {
+
+export const AddActivity = ({navigation}) => {
+  const [err, setErr] = useState(null)
   const [activityName, setActivityName] = useState("");
   const [location, setLocation] = useState("");
   const [price, setPrice] = useState("");
@@ -22,8 +24,8 @@ export const AddActivity = () => {
     }
   };
 
-  const handleSubmit = () => {
-    if(inputDate) {
+  const handleSubmit = (e) => {
+    if(inputDate && activityName,description, location, image, price, peopleCount) {
       const stringified =JSON.stringify(inputDate);
       const slicedInputDate = stringified.slice(1, 11)
       const addedActivity = {
@@ -32,15 +34,23 @@ export const AddActivity = () => {
         location: location,
         date: slicedInputDate,
         image: image,
-        price: price,
-        people: peopleCount,
+        price: Number(price),
+        people: Number(peopleCount),
       };
+
       const activityRef = doc(db, 'test-activities', itineraryId);
       updateDoc(activityRef, {
        activities: arrayUnion(addedActivity)
       });
+      // navigation.navigate('My Itinerary') to be added later
     }
+    else {
+      setErr('please fill all the fields.')
+    }
+
   };
+
+ 
 
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
@@ -55,6 +65,7 @@ export const AddActivity = () => {
         onChange={(e) => {
           setDescription(e.target.value);
         }}
+        multiline='true'
       />
       <TextInput
         placeholder="Location"
@@ -77,6 +88,7 @@ export const AddActivity = () => {
         onChange={(e) => {
           setImage(e.target.value);
         }}
+        inputMode= "url"
       />
       <TextInput
         value={price}
@@ -93,7 +105,8 @@ export const AddActivity = () => {
 
       <Pressable onPress={handleSubmit}>
         <Text>Submit</Text>
+        {(err ? <Text style ={{border: '1px solid red', color: 'red'}}>{err}</Text> : <Text style ={{color: 'white', backgroundColor: '#7743DB', border: '1px solid #C3ACD0'}}>Activity added suceesfully</Text>)}
       </Pressable>
-    </View>
-  );
+    </View> 
+  ); 
 };

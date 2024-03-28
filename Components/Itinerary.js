@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { StyleSheet, Text, View, Pressable, FlatList } from "react-native";
 import ActivityCard from "./ActivityCard";
 import { db } from "../firebase";
-import {doc, getDocs,collection, query, where} from 'firebase/firestore';
+import {doc, getDocs,collection} from 'firebase/firestore';
 
 export const Itinerary = ({route}) => {
 const itineraryId = route.params.itineraryId;
@@ -18,11 +18,13 @@ const [userItinerary, setUserItinerary] = useState([]);
           itinerary.push({...doc.data(), id: doc.id})
         }
       })
-      setUserItinerary(itinerary)
+      console.log(itinerary, "From useEffect")
+      setUserItinerary(itinerary[0])
     })
 
   }, [])
 
+  
   return (
     <View style={styles.itinerary}>
       <Text style={{ marginTop: "5%", fontSize: "120%", fontWeight: "bold" }}>
@@ -36,7 +38,7 @@ const [userItinerary, setUserItinerary] = useState([]);
           style={{ width: "90%", height: "70%", padding: "10%" }}
           data={userItinerary[0].activities}
           renderItem={({ item: activity }) => (
-            <ActivityCard activity={activity} itineraryId = {itineraryId} />
+            <ActivityCard activity={activity}/>
           )}
         />
       )}

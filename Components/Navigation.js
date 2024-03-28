@@ -13,8 +13,8 @@ export const Navigation = () => {
   return (
     <>
       <Drawer.Navigator>
-          <Drawer.Screen name="My Trips" component={HomePage}/>
-          <Drawer.Screen name="Recommendations" component={NavRecommendations} />
+          <Drawer.Screen name="My Trips" component={HomePage} />
+          <Drawer.Screen name="Recommendations" component={Recommendations} />
           <Drawer.Screen name="Profile" component={MainProfile} />
           <Drawer.Screen name="Single Itinerary" component={SingleItineraryNav} options={{drawerItemStyle: {height: 0}}} />
       </Drawer.Navigator>
