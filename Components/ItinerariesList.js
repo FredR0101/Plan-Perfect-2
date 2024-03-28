@@ -1,12 +1,14 @@
 import { View, Text, StyleSheet, Pressable, FlatList, ScrollView, SafeAreaView } from "react-native";
 import { db } from "../firebase";
-import { doc, getDocs, collection, query, where } from "firebase/firestore";
+import { doc, getDocs, collection, deleteDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { SingleItineraryNav } from "./SingleItineraryNav";
 import { auth } from "../firebase";
 
+
 export const ItinerariesList = () => {
+  const navigation = useNavigation();
   const [itinerary, setItinerary] = useState([]);
 
   useEffect(() => {
@@ -22,7 +24,16 @@ export const ItinerariesList = () => {
     });
   }, []);
 
-  const navigation = useNavigation();
+  const handleOnPress = (deleteId) => {
+   deleteDoc(doc(db, 'test-itineraries', deleteId))
+   .then(() => {
+     navigation.navigate('My Trips')
+     alert('Your trip has been deleted')
+   })
+   .catch((err) => {
+    alert(err, 'Something went wrong')
+   });
+  };
 
   return (
     <>
@@ -36,6 +47,7 @@ export const ItinerariesList = () => {
                     screen: "My Itinerary",
                     params: {
                       itineraryId: data.id,
+                      itineraryName: data.name
                     },
                   });
                 }}
@@ -44,6 +56,12 @@ export const ItinerariesList = () => {
                 <Text>Location: {data.location}</Text>
                 <Text>
                   Dates: {data.startDate} to {data.endDate}
+                </Text>
+                <Text>View Trip</Text>
+              </Pressable>
+              <Pressable onPress={() => handleOnPress(data.id)}>
+                <Text>
+                  Delete Trip
                 </Text>
               </Pressable>
             </View>

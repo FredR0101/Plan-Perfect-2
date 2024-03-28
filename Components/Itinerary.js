@@ -25,9 +25,10 @@ export const Itinerary = ({ route }) => {
     <View style={styles.itinerary}>
       <Text style={{ marginTop: "5%", fontSize: "120%", fontWeight: "bold" }}>
         {" "}
-        My Itinerary{" "}
+        {itineraryName}{" "}
       </Text>
-      {userItinerary.length === 0 ? (
+
+      {userItinerary.length === 0 ? 
         <Text> Empty Itinerary </Text>
       ) : (
         <FlatList
