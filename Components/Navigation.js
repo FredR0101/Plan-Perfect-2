@@ -1,7 +1,7 @@
 import * as React from "react"; 
 import {createDrawerNavigator} from '@react-navigation/drawer'
 import { HomePage } from "./HomePage.js";
-import {Recommendations} from './Recommendations'
+import {NavRecommendations} from './NavRecommendations'
 import {MainProfile} from "./MainProfile"
 
 
@@ -13,7 +13,7 @@ export const Navigation = () => {
     <>
       <Drawer.Navigator>
           <Drawer.Screen name="My Trips" component={HomePage} />
-          <Drawer.Screen name="Recommendations" component={Recommendations} />
+          <Drawer.Screen name="Recommendations" component={NavRecommendations} />
           <Drawer.Screen name="Profile" component={MainProfile} />
       </Drawer.Navigator>
     </>
