@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react'
-import { View, Text, FlatList } from "react-native";
+import { View, Text, FlatList, StyleSheet } from "react-native";
 import { db } from "../firebase";
 import { doc, getDocs, collection, query, where} from 'firebase/firestore';
 import * as React from 'react';
 import { Map } from './Map.js'
-import ActivityCard from './ActivityCard.js'
-
+import { EventCard } from './EventCard.js';
 
 export const Recommendations = () => {
   const [events, setEvents] = useState([])
-
+  
   useEffect(() => {
+    console.log('Reading events')
     const eventsRef = collection(db, "test-events")
     getDocs(eventsRef)
     .then(snapshot => {
@@ -23,15 +23,24 @@ export const Recommendations = () => {
   }, [])
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View style={styles.recommendationsPage}>
       <Map/>
       <FlatList
         style={{ width: "90%", height: "70%", padding: "10%" }}
         data={events}
         renderItem={({ item: event }) => (
-          <ActivityCard activity={event} />
+          <EventCard event={event} />
         )}
       />
     </View>      
   )
 }
+
+export const styles = StyleSheet.create({
+  recommendationsPage: {
+    backgroundColor: "#7743DB",
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: "center",
+  }
+})
