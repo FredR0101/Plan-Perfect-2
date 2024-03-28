@@ -10,7 +10,7 @@ export const Recommendations = () => {
   const [events, setEvents] = useState([])
   
   useEffect(() => {
-    console.log('Reading events')
+    // console.log('Reading events')
     const eventsRef = collection(db, "test-events")
     getDocs(eventsRef)
     .then(snapshot => {
