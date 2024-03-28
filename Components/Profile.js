@@ -6,6 +6,7 @@ import { useNavigation } from "@react-navigation/native";
 import { db } from "../firebase";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
+import App from "../Calendar";
 
 export const Profile = () => {
   const [user, setUser] = useState([]);
@@ -51,6 +52,7 @@ export const Profile = () => {
       <Pressable style={styles.button} onPress={handleSignout}>
         <Text style={styles.buttonText}>Sign out</Text>
       </Pressable>
+      <App />
     </View>
   );
 };
