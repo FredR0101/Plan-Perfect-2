@@ -3,7 +3,8 @@ import { Itinerary } from './Itinerary'
 import { AddActivity } from './AddActivity';
 import { ShareItinerary } from './ShareItinerary'
 
-export const Home = () => {
+export const SingleItineraryNav = () => {
+    // console.log(route.params)
     const Tab = createBottomTabNavigator();
     return (
         <>
