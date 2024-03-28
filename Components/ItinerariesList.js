@@ -7,7 +7,6 @@ import { SingleItineraryNav } from "./SingleItineraryNav";
 
 export const ItinerariesList = () => {
   const [itinerary, setItinerary] = useState([]);
-  const [activity, setActivity] = useState([]);
 
   useEffect(() => {
     const fetchData = collection(db, "test-itineraries");
@@ -18,7 +17,7 @@ export const ItinerariesList = () => {
       });
       setItinerary(itineraryData);
     });
-  }, [itinerary]);
+  }, []);
 
   const navigation = useNavigation();
 
