@@ -1,13 +1,22 @@
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import { ScrollView } from "react-native-web";
+//{activity}
+const ActivityCard = ({userItinerary}) => {
 
-const ActivityCard = ({ activity }) => {
-
+ 
   const handleDeleteButton = (value) => {
     console.log(value);
   };
 
+  const allActivities = userItinerary[0].activities
+  const activityId = userItinerary[0].id
+
   return (
-    <View style={styles.activityCard}>
+    <>
+    <ScrollView >
+    {allActivities.map((activity) => {
+    return(
+    <View key={activity.name} style={styles.activityCard}>
       <Image
         style={{
           height: "50%",
@@ -48,6 +57,10 @@ const ActivityCard = ({ activity }) => {
         </Text>
       </Pressable>
     </View>
+    )
+  })}
+    </ScrollView>
+    </>
   );
 };
 

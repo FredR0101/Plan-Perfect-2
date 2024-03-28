@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { View, Text, TextInput, Pressable } from "react-native";
 import { DatePickerInput } from "react-native-paper-dates";
 import { db } from "../firebase";
-import { doc, updateDoc, arrayUnion } from "firebase/firestore";
+import { doc, updateDoc, arrayUnion, collection, getDocs } from "firebase/firestore";
 import { enGB, registerTranslation } from "react-native-paper-dates";
 registerTranslation("en-GB", enGB);
 
@@ -16,7 +16,30 @@ export const AddActivity = ({navigation}) => {
   const [image, setImage] = useState("");
   const [peopleCount, setPeopleCount] = useState("");
   const [description, setDescription] = useState("");
-  const itineraryId = "78ruraYl5IjQENjn2S9A";
+  const [itineraryId, setItineraryId] = useState('')
+  const [activityId, setActivityId] = useState('')
+
+  useEffect(() => {
+    const fetchData = collection(db, "test-itineraries");
+    getDocs(fetchData).then((data) => {
+      const itineraryDataOne = [];
+      data.docs.forEach((doc) => {
+        itineraryDataOne.push({ id: doc.id });
+      });
+      setItineraryId(itineraryDataOne);
+    });
+  }, []);
+
+  useEffect(() => {
+    const fetchData = collection(db, "test-activities");
+    getDocs(fetchData).then((data) => {
+      const itineraryDataTwo = [];
+      data.docs.forEach((doc) => {
+        itineraryDataTwo.push({ id: doc.id });
+      });
+      setActivityId(itineraryDataTwo);
+    });
+  }, []);
 
   const handleNumberChange = (text, state) => {
     if (!isNaN(text)) {
