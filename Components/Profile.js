@@ -36,19 +36,35 @@ export const Profile = () => {
       })
       .catch((error) => alert(error.message));
   };
+  const handlePress = () => {
+    navigation.navigate("Profile settings")
+  }
+  const handlePressCalendar = () => {
+    navigation.navigate("Calendar")
+  }
 
   return (
     <>
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         {user.length > 0 && (
-          <Image source={{ uri: user[0].image }} style={styles.profileImage} />
+          <Image source={!user[0].image ? require("../blank-user.jpeg") : { uri: user[0].image }} style={styles.profileImage} />
         )}
         {user.length > 0 && (
-          <Text style={styles.text}>Username: {user[0].username}</Text>
+          <Text style={styles.text_main}>{user[0].username}</Text>
         )}
         {user.length > 0 && (
-          <Text style={styles.text}>Email: {user[0].email}</Text>
+          <Text style={styles.text}>{user[0].email}</Text>
         )}
+        <Pressable onPress={handlePress}>
+          <View style={styles.container}>
+                <Text> Edit account </Text>
+          </View>
+        </Pressable>
+        <Pressable onPress={handlePressCalendar}>
+          <View style={styles.container}>
+                <Text> Calendar </Text>
+          </View>
+        </Pressable>
         <Pressable style={styles.button} onPress={handleSignout}>
           <Text style={styles.buttonText}>Sign out</Text>
         </Pressable>
@@ -58,7 +74,7 @@ export const Profile = () => {
 };
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: "#0782F9",
+    backgroundColor: "#7743DB",
     width: "30%",
     padding: 15,
     borderRadius: 10,
@@ -71,13 +87,25 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   profileImage: {
-    height: "10%",
-    width: "25%",
+    height: "20%",
+    width: "40%",
     borderRadius: 200,
     marginBottom: 15,
   },
   text: {
     marginBottom: 10,
-    fontSize: 16,
+    fontSize: 18,
   },
+
+  text_main: {
+    marginBottom: 10,
+    fontSize: 20,
+  },
+  input: {
+    backgroundColor: "white",
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+    borderRadius: 10,
+    marginTop: 5,
+    },
 });
