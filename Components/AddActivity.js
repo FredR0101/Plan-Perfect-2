@@ -4,11 +4,13 @@ import { DatePickerInput } from "react-native-paper-dates";
 import { db } from "../firebase";
 import { doc, updateDoc, arrayUnion } from "firebase/firestore";
 import { enGB, registerTranslation } from "react-native-paper-dates";
+import { useNavigation } from "@react-navigation/native";
 registerTranslation("en-GB", enGB);
 
-
-export const AddActivity = ({navigation}) => {
-  const [err, setErr] = useState(null)
+export const AddActivity = () => {
+  const navigation = useNavigation();
+  const [err, setErr] = useState(null);
+  const [msg, setMsg] = useState(null);
   const [activityName, setActivityName] = useState("");
   const [location, setLocation] = useState("");
   const [price, setPrice] = useState("");
@@ -16,7 +18,7 @@ export const AddActivity = ({navigation}) => {
   const [image, setImage] = useState("");
   const [peopleCount, setPeopleCount] = useState("");
   const [description, setDescription] = useState("");
-  const itineraryId = "78ruraYl5IjQENjn2S9A";
+  const itineraryId = "ZWxnmbkJ3WMJMTFFBm1C";
 
   const handleNumberChange = (text, state) => {
     if (!isNaN(text)) {
@@ -25,9 +27,18 @@ export const AddActivity = ({navigation}) => {
   };
 
   const handleSubmit = (e) => {
-    if(inputDate && activityName,description, location, image, price, peopleCount) {
-      const stringified =JSON.stringify(inputDate);
-      const slicedInputDate = stringified.slice(1, 11)
+    setErr(null)
+    setMsg(null)
+    if (
+      (inputDate && activityName,
+      description,
+      location,
+      image,
+      price,
+      peopleCount)
+    ) {
+      const stringified = JSON.stringify(inputDate);
+      const slicedInputDate = stringified.slice(1, 11);
       const addedActivity = {
         name: activityName,
         description: description,
@@ -38,19 +49,16 @@ export const AddActivity = ({navigation}) => {
         people: Number(peopleCount),
       };
 
-      const activityRef = doc(db, 'test-activities', itineraryId);
+      const activityRef = doc(db, "test-activities", itineraryId);
       updateDoc(activityRef, {
-       activities: arrayUnion(addedActivity)
+        activities: arrayUnion(addedActivity),
+      }).then(() => {
+        setMsg("Activity added suceesfully!");
       });
-      // navigation.navigate('My Itinerary') to be added later
+    } else {
+      setErr("please fill all the fields.");
     }
-    else {
-      setErr('please fill all the fields.')
-    }
-
   };
-
- 
 
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
@@ -65,7 +73,7 @@ export const AddActivity = ({navigation}) => {
         onChange={(e) => {
           setDescription(e.target.value);
         }}
-        multiline='true'
+        multiline="true"
       />
       <TextInput
         placeholder="Location"
@@ -88,7 +96,7 @@ export const AddActivity = ({navigation}) => {
         onChange={(e) => {
           setImage(e.target.value);
         }}
-        inputMode= "url"
+        inputMode="url"
       />
       <TextInput
         value={price}
@@ -105,8 +113,25 @@ export const AddActivity = ({navigation}) => {
 
       <Pressable onPress={handleSubmit}>
         <Text>Submit</Text>
-        {(err ? <Text style ={{border: '1px solid red', color: 'red'}}>{err}</Text> : <Text style ={{color: 'white', backgroundColor: '#7743DB', border: '1px solid #C3ACD0'}}>Activity added suceesfully</Text>)}
+        {err ? (
+          <Text
+            style={{ border: "1px solid red", color: "red", marginTop: 10 }}
+          >
+            {err}
+          </Text>
+        ) : (
+          <Text
+            style={{
+              color: "white",
+              marginTop: 10,
+              backgroundColor: "#7743DB",
+              border: "1px solid #C3ACD0",
+            }}
+          >
+            {msg}
+          </Text>
+        )}
       </Pressable>
-    </View> 
-  ); 
+    </View>
+  );
 };
