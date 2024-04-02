@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, Pressable, FlatList, ScrollView, SafeAreaView } from "react-native";
 import { db } from "../firebase";
-import { doc, getDocs, collection, deleteDoc } from "firebase/firestore";
+import { doc, getDocs, collection, deleteDoc, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { SingleItineraryNav } from "./SingleItineraryNav";

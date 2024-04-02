@@ -30,7 +30,7 @@ export const Itinerary = ({ route }) => {
 
       {userItinerary.length === 0 ? 
         <Text> Empty Itinerary </Text>
-      ) : (
+       : (
         <FlatList
           style={{ width: "90%", height: "70%", padding: "10%" }}
           data={userItinerary[0].activities}
