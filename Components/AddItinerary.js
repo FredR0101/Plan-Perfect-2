@@ -6,7 +6,7 @@ import { enGB, registerTranslation } from "react-native-paper-dates";
 registerTranslation("en-GB", enGB);
 import { DatePickerInput } from "react-native-paper-dates";
 import { useState } from "react";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, setDoc, doc } from "firebase/firestore";
 import { db } from "../firebase";
 import { useNavigation } from "@react-navigation/native";
 import { auth } from "../firebase";
@@ -34,7 +34,10 @@ export const AddItinerary = () => {
         endDate: finalEndDate,
         uid: uid,
       })
-        .then(() => {
+        .then((docRef) => {
+          const itineraryAddedId = docRef.id
+          const activities = []
+          setDoc(doc(db, "test-activities", itineraryAddedId), {activities})          
           navigation.navigate("My Trips");
           alert("Itinerary has been added");
         })
