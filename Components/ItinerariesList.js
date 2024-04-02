@@ -50,6 +50,7 @@ export const ItinerariesList = () => {
                       itineraryName: data.name
                     },
                   });
+                  <SingleItineraryNav tripId = {data.id}/>
                 }}
               >
                 <Text>Name: {data.name} </Text>

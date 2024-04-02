@@ -25,7 +25,7 @@ export const Itinerary = ({ route }) => {
     <View style={styles.itinerary}>
       <Text style={{ marginTop: "5%", fontSize: "120%", fontWeight: "bold" }}>
         {" "}
-        {itineraryName}{" "}
+        Trip{" "}
       </Text>
 
       {userItinerary.length === 0 ? 

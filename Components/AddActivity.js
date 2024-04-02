@@ -7,7 +7,7 @@ import { enGB, registerTranslation } from "react-native-paper-dates";
 import { useNavigation } from "@react-navigation/native";
 registerTranslation("en-GB", enGB);
 
-export const AddActivity = () => {
+export const AddActivity = ({tripId}) => {
   const navigation = useNavigation();
   const [err, setErr] = useState(null);
   const [msg, setMsg] = useState(null);
@@ -18,30 +18,8 @@ export const AddActivity = () => {
   const [image, setImage] = useState("");
   const [peopleCount, setPeopleCount] = useState("");
   const [description, setDescription] = useState("");
-  const [itineraryId, setItineraryId] = useState('')
-  const [activityId, setActivityId] = useState('')
-
-  useEffect(() => {
-    const fetchData = collection(db, "test-itineraries");
-    getDocs(fetchData).then((data) => {
-      const itineraryDataOne = [];
-      data.docs.forEach((doc) => {
-        itineraryDataOne.push({ id: doc.id });
-      });
-      setItineraryId(itineraryDataOne);
-    });
-  }, []);
-
-  useEffect(() => {
-    const fetchData = collection(db, "test-activities");
-    getDocs(fetchData).then((data) => {
-      const itineraryDataTwo = [];
-      data.docs.forEach((doc) => {
-        itineraryDataTwo.push({ id: doc.id });
-      });
-      setActivityId(itineraryDataTwo);
-    });
-  }, []);
+  
+  const itineraryId = tripId
 
   const handleNumberChange = (text, state) => {
     if (!isNaN(text)) {
