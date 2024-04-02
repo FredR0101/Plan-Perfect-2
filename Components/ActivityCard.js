@@ -13,24 +13,40 @@ import {
   View,
 } from "react-native";
 import { db } from "../firebase";
-import { ScrollView } from "react-native-web";
-//{activity}
-const ActivityCard = ({userItinerary}) => {
 
- 
-  const handleDeleteButton = (value) => {
-    console.log(value);
+const ActivityCard = ({ activity, itineraryId, setUserItinerary }) => {
+  const handleDeleteButton = (activityName) => {
+    const activityRef = doc(db, "test-activities", itineraryId);
+    updateDoc(activityRef, {
+      activities: arrayRemove(activity),
+    })
+      .then(() => {
+        alert("Activity deleted");
+        setUserItinerary((currActivities) => {
+          const copyCurrActivities = [...currActivities];
+          const activitiesToKeep = copyCurrActivities[0].activities.filter(
+            (currActivity) => {
+              return currActivity.name !== activityName;
+            }
+          );
+          return [{ activities: activitiesToKeep }];
+        });
+      })
+      .catch(() => {
+        alert("Oops! something went wrong!");
+        setUserItinerary((currActivities) => {
+          return currActivities;
+        });
+      });
   };
 
-  const allActivities = userItinerary[0].activities
-  const activityId = userItinerary[0].id
+
+  const handleUpdateButton = (activityName) => {
+    console.log("clicked")
+  }
 
   return (
-    <>
-    <ScrollView >
-    {allActivities.map((activity) => {
-    return(
-    <View key={activity.name} style={styles.activityCard}>
+    <View style={styles.activityCard}>
       <Image
         style={{
           height: "50%",
@@ -87,10 +103,6 @@ const ActivityCard = ({userItinerary}) => {
         </Text>
       </Pressable>
     </View>
-    )
-  })}
-    </ScrollView>
-    </>
   );
 };
 
