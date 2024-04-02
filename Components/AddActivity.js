@@ -18,7 +18,7 @@ export const AddActivity = () => {
   const [image, setImage] = useState("");
   const [peopleCount, setPeopleCount] = useState("");
   const [description, setDescription] = useState("");
-  const itineraryId = "ZWxnmbkJ3WMJMTFFBm1C";
+  const itineraryId = "dypZdSzKez3BnGvcKYhU";
 
   const handleNumberChange = (text, state) => {
     if (!isNaN(text)) {
