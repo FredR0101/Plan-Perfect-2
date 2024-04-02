@@ -39,6 +39,11 @@ export const Calendar = () =>  {
   return (
     <View style={{ flex: 1 }}>
       <Agenda
+        theme={{
+          calendarBackground: 'white',
+          dayTextColor: '#7743DB',
+          textDisabledColor: '#444',
+        }}
         items={events}
         renderItem={(item, isFirst) => (
           <Pressable style={styles.item}>
@@ -65,8 +70,8 @@ const styles = StyleSheet.create({
     marginTop: 17,
   },
   itemText: {
-    color: '#888',
+    color: '#7743DB',
     fontSize: 16,
-  }
+  },
 });
 
