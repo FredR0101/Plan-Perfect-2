@@ -10,7 +10,6 @@ export const Recommendations = () => {
   const [events, setEvents] = useState([])
   
   useEffect(() => {
-    // console.log('Reading events')
     const eventsRef = collection(db, "test-events")
     getDocs(eventsRef)
     .then(snapshot => {
@@ -38,7 +37,6 @@ export const Recommendations = () => {
 
 export const styles = StyleSheet.create({
   recommendationsPage: {
-    backgroundColor: "#7743DB",
     flex: 1,
     alignItems: 'center',
     justifyContent: "center",
