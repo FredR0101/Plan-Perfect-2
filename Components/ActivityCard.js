@@ -1,10 +1,49 @@
-import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import {
+  updateDoc,
+  doc,
+  arrayRemove,
+} from "firebase/firestore";
 
-const ActivityCard = ({ activity }) => {
+import {
+  Image,
+  Pressable,
+  RefreshControl,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
+import { db } from "../firebase";
 
-  const handleDeleteButton = (value) => {
-    console.log(value);
+const ActivityCard = ({ activity, itineraryId, setUserItinerary }) => {
+  const handleDeleteButton = (activityName) => {
+    const activityRef = doc(db, "test-activities", itineraryId);
+    updateDoc(activityRef, {
+      activities: arrayRemove(activity),
+    })
+      .then(() => {
+        alert("Activity deleted");
+        setUserItinerary((currActivities) => {
+          const copyCurrActivities = [...currActivities];
+          const activitiesToKeep = copyCurrActivities[0].activities.filter(
+            (currActivity) => {
+              return currActivity.name !== activityName;
+            }
+          );
+          return [{ activities: activitiesToKeep }];
+        });
+      })
+      .catch(() => {
+        alert("Oops! something went wrong!");
+        setUserItinerary((currActivities) => {
+          return currActivities;
+        });
+      });
   };
+
+
+  const handleUpdateButton = (activityName) => {
+    console.log("clicked")
+  }
 
   return (
     <View style={styles.activityCard}>
@@ -31,7 +70,7 @@ const ActivityCard = ({ activity }) => {
       <Text style={styles.activityInfo}>
         Number of people: {activity.people}
       </Text>
-      <Pressable onPress={handleDeleteButton}>
+      <Pressable onPress={() => handleDeleteButton(activity.name)}>
         <Text
           style={{
             backgroundColor: "#7743DB",
@@ -47,6 +86,22 @@ const ActivityCard = ({ activity }) => {
           Delete activity
         </Text>
       </Pressable>
+      <Pressable onPress={() => handleUpdateButton(activity.name)}>
+        <Text
+          style={{
+            backgroundColor: "#7743DB",
+            border: "1px solid #C3ACD0",
+            color: "white",
+            height: 30,
+            width: 150,
+            textAlign: "center",
+            marginTop: 10,
+            paddingTop: 5,
+          }}
+        >
+          Update Activity
+        </Text>
+      </Pressable>
     </View>
   );
 };
@@ -56,7 +111,8 @@ export const styles = StyleSheet.create({
     marginTop: 70,
     border: "1px solid black",
     backgroundColor: "#C3ACD0",
-    height: 300,
+    height: 400,
+    width: 500,
   },
   activityInfo: {
     textAlign: "left",

@@ -18,7 +18,8 @@ export const Itinerary = ({ route }) => {
       });
       setUserItinerary(itinerary);
     });
-  }, []);
+  }, [setUserItinerary]);
+
 
   return (
     <View style={styles.itinerary}>
@@ -33,7 +34,7 @@ export const Itinerary = ({ route }) => {
           style={{ width: "90%", height: "70%", padding: "10%" }}
           data={userItinerary[0].activities}
           renderItem={({ item: activity }) => (
-            <ActivityCard activity={activity} />
+            <ActivityCard activity={activity} setUserItinerary = {setUserItinerary} itineraryId ={itineraryId} />
           )}
         />
       )}
