@@ -42,7 +42,7 @@ export const Profile = () => {
       .catch((err) => {
         throw err;
       });
-  }, []);
+  }, [setUser, setName, setBio]);
 
   const handleSignout = () => {
     auth
@@ -58,12 +58,17 @@ export const Profile = () => {
     const ref = doc(db, "test-users", uid);
 
     updateDoc(ref, { username: name, bio: bio })
-      .then(() => {
-        alert("Profile successfully updated");
-      })
-      .catch((err) => {
-        alert(err, "Something went wrong");
-      });
+    .then(() => {
+      setUser((prevUser) => ({
+        ...prevUser,
+        username: name,
+        bio: bio,
+      }));
+      alert("Profile successfully updated");
+    })
+    .catch((err) => {
+      alert("Something went wrong");
+    });
   };
   const handleDocDelete = () => {
     const uid = auth.currentUser.uid;
