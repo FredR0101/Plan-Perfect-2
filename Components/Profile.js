@@ -4,7 +4,6 @@ import {
   Text,
   Image,
   TextInput,
-  TouchableOpacity,
   Pressable,
 } from "react-native";
 import * as React from "react";
@@ -134,10 +133,10 @@ export const Profile = () => {
         </View>
         <View style={styles.buttonContainerDelete}>
           <Pressable style={styles.buttonDelete} onPress={handleSignout}>
-            <Text style={styles.buttonText}>Sign out</Text>
+            <Text style={styles.buttonTextDelete}>Sign out</Text>
           </Pressable>
           <Pressable onPress={handleDocDelete} style={styles.buttonDelete}>
-            <Text style={styles.buttonText}>Delete</Text>
+            <Text style={styles.buttonTextDelete}>Delete</Text>
           </Pressable>
         </View>
       </View>
@@ -229,11 +228,10 @@ const styles = StyleSheet.create({
     height: 50,
   },
   buttonTextDelete: {
-    flex: 1,
     color: "white",
-    fontWeight: "600",
-    fontSize: 13,
-    alignItems: "center",
-    left: 20
-  }
+    fontWeight: "700",
+    fontSize: 16,
+    left: "25%",
+    textAlign: "center",
+  },
 });
