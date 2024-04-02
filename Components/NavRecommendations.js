@@ -7,7 +7,6 @@ export const NavRecommendations = () => {
     return (
         <Tab.Navigator screenOptions={{headerShown: false}} initialRouteName='Recommendations'>
             <Tab.Screen name="Recommendations" component={Recommendations}/>
-            <Tab.Screen name="Single Event" component={SingleEvent} listeners={{tabPress: e => {e.preventDefault(); }}}/>
         </Tab.Navigator>
     )
 }
