@@ -21,6 +21,8 @@ export const Profile = () => {
   const [email, setEmail] = useState("");
   const [bio, setBio] = useState("");
   const [avatar, setAvatar] = useState("");
+  const [showAlert, setShowAlert] = useState(false)
+  const [updateMessage, setUpdateMessage] = useState("")
 
   const navigation = useNavigation();
   const [isLoading, setIsLoading] = useState(false)
@@ -72,10 +74,14 @@ export const Profile = () => {
           bio: bio,
         }));
         setIsLoading(false)
-        alert("Profile successfully updated");
+        setShowAlert(true)
+        setUpdateMessage("Updated Successfully")
+        setTimeout(() => {
+          setShowAlert(false); 
+        }, 2000);
       })
       .catch((err) => {
-        alert("Something went wrong");
+        throw(err)
       });
   };
   const handleDocDelete = () => {
@@ -148,6 +154,7 @@ export const Profile = () => {
             <Pressable style={styles.button} onPress={handleSubmit}>
               <Text style={styles.buttonText}>Update</Text>
             </Pressable>
+            {showAlert && (<Text style={styles.alertText}>{updateMessage}</Text>)}
           </View>
           <View style={styles.buttonContainerDelete}>
             <Pressable style={styles.buttonDelete} onPress={handleSignout}>
@@ -264,4 +271,18 @@ const styles = StyleSheet.create({
     fontSize: 16,
     left: "35%",
   },
+  alertText: {
+    fontSize: 15,
+    color: "green",
+    left: "30%",
+    right: "25%",
+    marginTop: 15
+  },
+  errorAlertText: {
+    fontSize: 15,
+    color: "red",
+    left: "30%",
+    right: "25%",
+    marginTop: 15
+  }
 });
