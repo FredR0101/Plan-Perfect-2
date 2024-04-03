@@ -6,7 +6,6 @@ import LoginPage from "./Components/LoginPage";
 import { Navigation } from "./Components/Navigation";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import SignUp from "./Components/SignUpPage";
-import EditUser from "./Components/EditUser";
 
 
 const Stack = createNativeStackNavigator();
@@ -32,27 +31,9 @@ export default function App() {
                name="Nav"
                component={Navigation}
              />
-            <Stack.Screen
-             options={{ headerShown: false }}
-             name="EditUser"
-             component={EditUser}
-           />
-          {/* <Stack.Screen
-            options={{ headerShown: false }}
-            name="Home"
-            component={Home}
-          /> */}
         </Stack.Navigator>
       </NavigationContainer>
     </>
   );
 }
 
-// export const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#fff',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-// });

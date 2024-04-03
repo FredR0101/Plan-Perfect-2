@@ -2,54 +2,72 @@ import { Image, StyleSheet, Text, View, Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 export const EventCard = ({ event }) => {
-  const navigation = useNavigation()
+  const navigation = useNavigation();
   return (
-    <>
     <View style={styles.eventCard}>
-    <Pressable onPress={() => {navigation.navigate("Single Event", {event})}}> 
-      <Image
-        style={{
-          height: "120%",
-          width: "100%",
-          border: "4px solid #C3ACD0",
-          borderRadius: "5%",
-        }}
-        source={{
-          uri: event.image,
-        }}
-      />
-      <Text style={styles.eventInfo}>{event.name}</Text>
-      <Text style={styles.eventInfo}>{event.description}</Text>
-      <Text style={styles.eventInfo}>Location: {event.location}</Text>
-
-      <Text style={styles.button}> Click On Event Card To View More </Text>
-    </Pressable>
+        <Image
+          style={[
+            {
+              height: 200,
+              width: "fitContent",
+              borderRadius: 10,
+            },
+            styles.eventInfo,
+          ]}
+          source={{
+            uri: event.image,
+          }}
+        />
+        <Text style={[styles.eventInfo, styles.eventName]}>{event.name}</Text>
+        <Text style={styles.eventInfo}>Location: {event.location}</Text>
+        <Text style={styles.eventInfo}>
+          {event.description && event.description.slice(0, 120)}...
+        </Text>
+        <Pressable
+          onPress={() => {
+            navigation.navigate("Single Event", { event });
+          }}
+        >
+          <Text style={styles.btn}>View More</Text>
+        </Pressable>
     </View>
-    </>
   );
 };
 
 export const styles = StyleSheet.create({
   eventCard: {
     flex: 1,
-    marginBottom: "85%",
-    paddingTop: '30%',
-    height: "100%",
-    width: "100%",
-    
+    marginTop: 50,
+    marginBottom: 30,
+    paddingBottom: 5,
+    backgroundColor: "#FFFBF5",
+    height: "300%",
+    padding: 15,
+    borderRadius: 10,
+    border: "1px solid #F7EFE5",
   },
   eventInfo: {
-    textAlign: "left",
+    alignItems: "center",
+    paddingBottom: 20,
   },
-  button: {
-    backgroundColor: "#7743DB",
-    border: "4px solid #C3ACD0 ",
-    borderRadius: "10%",
-    color: "white",
+  eventName: {
+    paddingTop: 10,
+    fontWeight: "bold",
+    fontSize: 20,
+  },
+  btn: {
     width: "100%",
+    backgroundColor: "#7743DB",
+    height: 40,
+    paddingTop: 10,
+    marginBottom: 10,
+    color: "white",
+    borderRadius: 2,
+    justifyContent: "center",
+    alignItems: "center",
     textAlign: "center",
-    float: "center",
-    padding: "5%",
-    fontSize: "80%"
-}
+    border: "1px solid #7743DB",
+    borderRadius: 10,
+  },
 });
+
