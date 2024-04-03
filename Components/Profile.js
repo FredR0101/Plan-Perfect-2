@@ -58,17 +58,17 @@ export const Profile = () => {
     const ref = doc(db, "test-users", uid);
 
     updateDoc(ref, { username: name, bio: bio })
-    .then(() => {
-      setUser((prevUser) => ({
-        ...prevUser,
-        username: name,
-        bio: bio,
-      }));
-      alert("Profile successfully updated");
-    })
-    .catch((err) => {
-      alert("Something went wrong");
-    });
+      .then(() => {
+        setUser((prevUser) => ({
+          ...prevUser,
+          username: name,
+          bio: bio,
+        }));
+        alert("Profile successfully updated");
+      })
+      .catch((err) => {
+        alert("Something went wrong");
+      });
   };
   const handleDocDelete = () => {
     const uid = auth.currentUser.uid;
@@ -94,55 +94,57 @@ export const Profile = () => {
   };
   return (
     <View style={styles.container}>
-      <View style={styles.avatarContainer}>
-        <Image
-          style={styles.avatar}
-          source={!avatar ? require("../blank-user.jpeg") : { uri: avatar }}
-        />
-        <Pressable
-          style={styles.changeAvatarButton}
-          onPress={() => {
-            /* open image picker */
-          }}
-        >
-          <Text style={styles.changeAvatarButtonText}>Change Avatar</Text>
-        </Pressable>
-      </View>
-      <View style={styles.form}>
-        <Text style={styles.label}>Name</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Enter Name"
-          value={name}
-          onChangeText={setName}
-        />
-        <Text style={styles.label}>Email</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Enter Email"
-          value={email}
-          onChangeText={setEmail}
-          readOnly
-        />
-        <Text style={styles.label}>Bio</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Enter Bio"
-          value={bio}
-          onChangeText={setBio}
-        />
-        <View style={styles.buttonContainer}>
-          <Pressable style={styles.button} onPress={handleSubmit}>
-            <Text style={styles.buttonText}>Update</Text>
+      <View style={styles.formContainer}>
+        <View style={styles.avatarContainer}>
+          <Image
+            style={styles.avatar}
+            source={!avatar ? require("../blank-user.jpeg") : { uri: avatar }}
+          />
+          <Pressable
+            style={styles.changeAvatarButton}
+            onPress={() => {
+              /* open image picker */
+            }}
+          >
+            <Text style={styles.changeAvatarButtonText}>Change Avatar</Text>
           </Pressable>
         </View>
-        <View style={styles.buttonContainerDelete}>
-          <Pressable style={styles.buttonDelete} onPress={handleSignout}>
-            <Text style={styles.buttonTextDelete}>Sign out</Text>
-          </Pressable>
-          <Pressable onPress={handleDocDelete} style={styles.buttonDelete}>
-            <Text style={styles.buttonTextDelete}>Delete</Text>
-          </Pressable>
+        <View style={styles.form}>
+          <Text style={styles.label}>Name</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter Name"
+            value={name}
+            onChangeText={setName}
+          />
+          <Text style={styles.label}>Email</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter Email"
+            value={email}
+            onChangeText={setEmail}
+            readOnly
+          />
+          <Text style={styles.label}>Bio</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter Bio"
+            value={bio}
+            onChangeText={setBio}
+          />
+          <View style={styles.buttonContainer}>
+            <Pressable style={styles.button} onPress={handleSubmit}>
+              <Text style={styles.buttonText}>Update</Text>
+            </Pressable>
+          </View>
+          <View style={styles.buttonContainerDelete}>
+            <Pressable style={styles.buttonDelete} onPress={handleSignout}>
+              <Text style={styles.buttonTextDelete}>Sign Out</Text>
+            </Pressable>
+            <Pressable onPress={handleDocDelete} style={styles.buttonDelete}>
+              <Text style={styles.buttonTextDelete}>Delete</Text>
+            </Pressable>
+          </View>
         </View>
       </View>
     </View>
@@ -153,9 +155,17 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    backgroundImage: "linear-gradient(to bottom right, transparent, #7743DB)",
   },
   form: {
     width: "80%",
+  },
+  formContainer: {
+    width: "80%",
+    backgroundColor: "rgba(255,255,255,0.8)",
+    padding: 20,
+    borderRadius: 10,
+    alignItems: "center",
   },
   label: {
     marginTop: 20,
@@ -186,7 +196,7 @@ const styles = StyleSheet.create({
     color: "white",
     fontWeight: "700",
     fontSize: 16,
-    left: "15%",
+    left: "25%",
     alignItems: "center",
   },
   buttonOutline: {
@@ -208,6 +218,7 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     borderRadius: 50,
+    border: '2px solid #7743DB'
   },
   changeAvatarButton: {
     marginTop: 10,
@@ -219,24 +230,26 @@ const styles = StyleSheet.create({
   buttonContainerDelete: {
     flexDirection: "row",
     flex: 1,
-    gap: 10
-  }, 
+    gap: 10,
+    right: 30,
+  },
   buttonDelete: {
-    display: "flex", 
+    display: "flex",
     backgroundColor: "#7743DB",
-    width: "50%", 
-    padding: 15,
+    width: "60%",
+    padding: 5,
     paddingRight: 60,
     borderRadius: 10,
     alignItems: "center",
     marginTop: 100,
     height: 50,
+    justifyContent: "center",
+    textAlign: "center",
   },
   buttonTextDelete: {
     color: "white",
     fontWeight: "700",
     fontSize: 16,
-    left: "25%",
-    textAlign: "center",
+    left: "35%",
   },
 });
