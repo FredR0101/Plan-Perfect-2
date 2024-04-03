@@ -89,7 +89,6 @@ export const AddActivity = ({tripId}) => {
           setLocation(e.target.value);
         }}
       />
-      <View>
         <DatePickerInput style={styles.datePicker}
           locale="en-GB"
           label="Pick a date"
@@ -97,7 +96,6 @@ export const AddActivity = ({tripId}) => {
           onChange={(d) => setInputDate(d)}
           inputMode="start"
         />
-      </View>
       <TextInput style = {styles.input}
         placeholder="Enter the image url"
         value = {image}
@@ -124,7 +122,6 @@ export const AddActivity = ({tripId}) => {
         <Text style={styles.btnText}> Add Activity </Text>
       </Pressable>
     </View>
-
     </View>
   );
 };
@@ -149,39 +146,33 @@ const styles = StyleSheet.create({
   },
 
   headerTxt: {
+    fontSize: 18,
     fontWeight: "bold",
-    marginBottom: "3%",
+    marginBottom: 20,
   },
 
   input: {
     backgroundColor: "white" ,
     paddingHorizontal: 15,
     paddingVertical: 10,
-    borderRadius: 10,
-    marginTop: 5,
-    marginBottom: 5,
+    marginTop: 10,
     border: "1px solid black"
     },
   
   datePicker: {
-    padding: 2,
-    marginTop: 5,
-    marginBottom: 5,
-    fontSize: "80%",
+    marginTop: 10,
     backgroundColor: "white",
-    borderRadius: "5%",
     border: "1px solid black"
   },
 
   btn: {
-    marginTop: 5,
-    marginBottom: 5,
+    marginTop: 15,
+    marginBottom: 15,
     width: "100%",
     backgroundColor: "#7743DB",
     height: 40,
     paddingTop: 5,
     color: "white",
-    borderRadius: 2,
     justifyContent: "center",
     alignItems: "center",
     textAlign: "center",
@@ -191,7 +182,7 @@ const styles = StyleSheet.create({
 
   btnText: {
     color: "white",
-    fontWeight: "700",
+    fontWeight: "bold",
     fontSize: 16,
   },
 })
