@@ -4,6 +4,7 @@ import { auth, db } from "../firebase";
 import { setDoc, doc } from "firebase/firestore";
 import { KeyboardAvoidingView, TextInput } from "react-native-web";
 import { useNavigation } from "@react-navigation/native";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 const SignUp = () => {
   const [username, setUserName] = useState("");
