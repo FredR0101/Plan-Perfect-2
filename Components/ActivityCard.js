@@ -12,7 +12,13 @@ import {
   Text,
   View,
 } from "react-native";
+
 import { db } from "../firebase";
+
+import { Entypo } from '@expo/vector-icons'
+import { FontAwesome } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
+import { FontAwesome6 } from '@expo/vector-icons'
 
 const ActivityCard = ({ activity, itineraryId, setUserItinerary }) => {
   const handleDeleteButton = (activityName) => {
@@ -63,12 +69,10 @@ const ActivityCard = ({ activity, itineraryId, setUserItinerary }) => {
         {activity.name}
       </Text>
       <Text style={styles.activityInfo}>{activity.description}</Text>
-      <Text style={styles.activityInfo}>Location: {activity.location}</Text>
-      <Text style={styles.activityInfo}>Price: £{activity.price}</Text>
-      <Text style={styles.activityInfo}>Date: {activity.date}</Text>
-      <Text style={styles.activityInfo}>
-        Number of people: {activity.people}
-      </Text>
+      <Text style={styles.activityInfo}> <Entypo name="location-pin" size={24} color="black" /> {activity.location} </Text>
+      <Text style={styles.activityInfo}> <Ionicons name="pricetags-outline" size={24} color="black" /> £{activity.price} </Text>
+      <Text style={styles.activityInfo}> <FontAwesome name="calendar-o" size={24} color="black" /> {activity.date} </Text>
+      <Text style={styles.activityInfo}> <FontAwesome6 name="people-group" size={24} color="black" /> {activity.people} </Text>
       <View style={styles.btnContainer}>
         <Pressable onPress={() => handleUpdateButton(activity.name)}>
           <Text style={styles.btn}> Update Activity </Text>
@@ -86,7 +90,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     marginTop: 50,
     marginBottom: 30,
-    paddingBottom: 5,
+    paddingBottom: 10,
     backgroundColor: "#FFFBF5",
     height: "300%",
     padding: 15,

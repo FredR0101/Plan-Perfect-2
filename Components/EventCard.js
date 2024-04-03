@@ -1,5 +1,6 @@
 import { Image, StyleSheet, Text, View, Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { Entypo } from '@expo/vector-icons'
 
 export const EventCard = ({ event }) => {
   const navigation = useNavigation();
@@ -19,7 +20,7 @@ export const EventCard = ({ event }) => {
           }}
         />
         <Text style={[styles.eventInfo, styles.eventName]}>{event.name}</Text>
-        <Text style={styles.eventInfo}>Location: {event.location}</Text>
+        <Text style={styles.eventInfo}> <Entypo name="location-pin" size={24} color="black" /> {event.location}</Text>
         <Text style={styles.eventInfo}>
           {event.description && event.description.slice(0, 120)}...
         </Text>

@@ -4,13 +4,9 @@ import { DatePickerInput } from "react-native-paper-dates";
 import { db } from "../firebase";
 import { doc, updateDoc, arrayUnion, collection, getDocs } from "firebase/firestore";
 import { enGB, registerTranslation } from "react-native-paper-dates";
-import { useNavigation } from "@react-navigation/native";
 registerTranslation("en-GB", enGB);
 
 export const AddActivity = ({tripId}) => {
-  const navigation = useNavigation();
-  const [err, setErr] = useState(null);
-  const [msg, setMsg] = useState(null);
   const [activityName, setActivityName] = useState("");
   const [location, setLocation] = useState("");
   const [price, setPrice] = useState("");
@@ -28,8 +24,6 @@ export const AddActivity = ({tripId}) => {
   };
 
   const handleSubmit = (e) => {
-    setErr(null)
-    setMsg(null)
     if (
       (inputDate && activityName,
       description,
@@ -54,24 +48,35 @@ export const AddActivity = ({tripId}) => {
       updateDoc(activityRef, {
         activities: arrayUnion(addedActivity),
       }).then(() => {
-        setMsg("Activity added suceesfully!");
+        alert("Activity added successfully!");
+        setActivityName("")
+        setDescription("")
+        setLocation("")
+        setInputDate(undefined)
+        setImage("")
+        setPrice("")
+        setPeopleCount("")
       });
     } else {
-      setErr("please fill all the fields.");
+      alert("Please fill all the fields.");
     }
   };
 
   return (
+    <View style={styles.background}>
+
     <View style={styles.formContainer}>
       <Text style={styles.headerTxt}> Please specify the activity details: </Text>
       <TextInput style = {styles.input}
         placeholder="Name of the activity"
+        value = {activityName}
         onChange={(e) => {
           setActivityName(e.target.value);
         }}
       />
       <TextInput style = {styles.input}
         placeholder="Describe the activity"
+        value = {description}
         onChange={(e) => {
           setDescription(e.target.value);
         }}
@@ -79,6 +84,7 @@ export const AddActivity = ({tripId}) => {
       />
       <TextInput style = {styles.input}
         placeholder="Location"
+        value = {location}
         onChange={(e) => {
           setLocation(e.target.value);
         }}
@@ -94,6 +100,7 @@ export const AddActivity = ({tripId}) => {
       </View>
       <TextInput style = {styles.input}
         placeholder="Enter the image url"
+        value = {image}
         onChange={(e) => {
           setImage(e.target.value);
         }}
@@ -115,22 +122,25 @@ export const AddActivity = ({tripId}) => {
       <Pressable style = {styles.btn} 
         onPress={handleSubmit}>
         <Text style={styles.btnText}> Add Activity </Text>
-        {err ? (
-          <Text> {err} </Text>
-        ) : (
-          <Text> {msg} </Text>
-        )}
       </Pressable>
+    </View>
+
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  background: {
+    backgroundImage: 'linear-gradient(to bottom right, transparent, #7743DB)',
+  },
+
   formContainer: { 
     flex: 1,
     marginTop: 50,
-    marginBottom: 30,
-    paddingBottom: 5,
+    marginBottom: 500,
+    marginLeft: 20,
+    marginRight: 20,
+    paddingBottom: 10,
     backgroundColor: "#FFFBF5",
     height: "300%",
     padding: 15,
@@ -144,27 +154,40 @@ const styles = StyleSheet.create({
   },
 
   input: {
-    backgroundColor: "white",
+    backgroundColor: "white" ,
     paddingHorizontal: 15,
     paddingVertical: 10,
     borderRadius: 10,
     marginTop: 5,
+    marginBottom: 5,
+    border: "1px solid black"
     },
   
   datePicker: {
-    marginTop: "3%",
+    padding: 2,
+    marginTop: 5,
+    marginBottom: 5,
     fontSize: "80%",
     backgroundColor: "white",
-    borderRadius: "5%,"
+    borderRadius: "5%",
+    border: "1px solid black"
   },
 
   btn: {
-    marginTop: "5%",
+    marginTop: 5,
+    marginBottom: 5,
+    width: "100%",
     backgroundColor: "#7743DB",
-    padding: 15,
-    borderRadius: 10,
+    height: 40,
+    paddingTop: 5,
+    color: "white",
+    borderRadius: 2,
+    justifyContent: "center",
     alignItems: "center",
-    },
+    textAlign: "center",
+    border: "1px solid #7743DB",
+    borderRadius: 10,
+  },
 
   btnText: {
     color: "white",

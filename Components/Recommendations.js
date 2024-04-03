@@ -3,7 +3,6 @@ import { View, Text, FlatList, StyleSheet } from "react-native";
 import { db } from "../firebase";
 import { doc, getDocs, collection, query, where} from 'firebase/firestore';
 import * as React from 'react';
-import { Map } from './Map.js'
 import { EventCard } from './EventCard.js';
 
 export const Recommendations = () => {
@@ -23,7 +22,6 @@ export const Recommendations = () => {
 
   return (
     <View style={styles.recommendationsPage}>
-      <Map/>
       <FlatList
         style={{ width: "90%", height: "70%", padding: "10%" }}
         data={events}
