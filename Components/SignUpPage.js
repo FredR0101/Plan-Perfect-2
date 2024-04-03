@@ -49,7 +49,7 @@ const SignUp = () => {
         style={styles.logo}
         source={require("../travel-logo-Photoroom.png")}
       />
-      <Text style={styles.title}>Plan Perfect</Text>
+      <Image style={styles.logoname} source={require("../logoname.png")} />
       <View style={styles.innerContainer}>
         <View style={styles.inputContainer}>
           <TextInput
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
   title: {
     transform: [{ translateY: -50 }],
     fontSize: 30,
-    color: "white"
+    color: "white",
   },
   innerContainer: {
     width: "80%",
@@ -163,6 +163,11 @@ const styles = StyleSheet.create({
   logo: {
     height: 150,
     width: 150,
-    marginBottom: 50
+    marginBottom: 50,
   },
+  logoname: {
+    width: "70%",
+    height: 60,
+    transform: [{ translateY: -55 }],
+  }
 });
