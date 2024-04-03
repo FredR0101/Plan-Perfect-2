@@ -3,7 +3,8 @@ import { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { RadioButton } from 'react-native-paper';
 import { db } from "../firebase";
-import { updateDoc, collection, doc, getDocs, arrayUnion} from "firebase/firestore";
+import { updateDoc, collection, doc, getDocs, arrayUnion, query, where} from "firebase/firestore";
+import { auth } from "../firebase";
 
 
 export const SingleEvent = ({route: {params: {event}}}) => {
@@ -23,9 +24,11 @@ export const SingleEvent = ({route: {params: {event}}}) => {
         .catch(() => { alert("Error when adding activity")})
     }
 
-    useEffect(() => {
+      useEffect(() => {
+        const uid = auth.currentUser.uid;
         const fetchData = collection(db, "test-itineraries");
-        getDocs(fetchData).then((data) => {
+        const userQuery = query(fetchData, where("uid", "==", uid));
+        getDocs(userQuery).then((data) => {
           const itineraryData = [];
           data.docs.forEach((doc) => {
             itineraryData.push({ ...doc.data(), id: doc.id });
@@ -33,7 +36,6 @@ export const SingleEvent = ({route: {params: {event}}}) => {
           setItineraries(itineraryData);
         });
       }, []);
-
 
     return (
         <>

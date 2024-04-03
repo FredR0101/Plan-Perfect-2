@@ -27,6 +27,7 @@ export const ItinerariesList = () => {
   const handleOnPress = (deleteId) => {
    deleteDoc(doc(db, 'test-itineraries', deleteId))
    .then(() => {
+     deleteDoc(doc(db, 'test-activities', deleteId))
      navigation.navigate('My Trips')
      alert('Your trip has been deleted')
    })
