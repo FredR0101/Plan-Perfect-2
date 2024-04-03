@@ -40,5 +40,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: "center",
-  }
+    backgroundImage: 'linear-gradient(to bottom right, transparent, #7743DB)',
+  },
+
 })
