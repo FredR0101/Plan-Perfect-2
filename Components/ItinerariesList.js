@@ -5,7 +5,9 @@ import { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { SingleItineraryNav } from "./SingleItineraryNav";
 import { auth } from "../firebase";
-import Ionicons from '@expo/vector-icons/Ionicons';
+import { FontAwesome } from '@expo/vector-icons';
+import { Entypo } from '@expo/vector-icons';
+
 export const ItinerariesList = () => {
   const navigation = useNavigation();
   const [itinerary, setItinerary] = useState([]);
@@ -37,12 +39,21 @@ export const ItinerariesList = () => {
         {itinerary.map((data) => {
           return (
             <View style={styles.card} key={data.id}>
-                <Text style={styles.cardTitle}>Name: {data.name} </Text>
-                <Text style={styles.cardLocation}>Location: {data.location}</Text>
+                <Text style={styles.cardTitle}>{data.name} </Text>
+
+                <View style={styles.locationAlignment}>
+                <Entypo name="location-pin" size={24} color="#7743DB" />
+                <Text style={styles.cardLocation}>{data.location}</Text>
+                </View>
+                <View style={styles.dateAlignment}>
+                <FontAwesome name="calendar-o" size={22} color="#7743DB" />
                 <Text style={styles.cardDates}>
-                  Dates: {data.startDate} to {data.endDate}
+                  {data.startDate} to {data.endDate}
                 </Text>
-              <Pressable style={styles.viewTripButton}
+                </View>
+
+                <View style={styles.buttonContainerDelete}>
+              <Pressable style={styles.buttonDelete}
                 onPress={() => {
                   navigation.navigate("Single Itinerary", {
                     screen: "My Itinerary",
@@ -54,13 +65,12 @@ export const ItinerariesList = () => {
                   <SingleItineraryNav tripId = {data.id}/>
                 }}
               >
-                <Text>View Trip</Text>
+                <Text style={styles.buttonTextDelete}>View Trip</Text>
               </Pressable>
-              <Pressable style={styles.deleteButton} onPress={() => handleOnPress(data.id)}>
-                <Text>
-                  Delete
-                </Text>
+              <Pressable style={styles.buttonDelete} onPress={() => handleOnPress(data.id)}>
+              <Text style={styles.buttonTextDelete}>Delete</Text>
               </Pressable>
+              </View>
             </View>
           );
         })}
@@ -77,7 +87,7 @@ const styles = StyleSheet.create({
     backgroundImage: 'linear-gradient(to bottom right, transparent, #7743DB)',
   },
   card: {
-    color: '#7743DB',
+    color: '#C3ACD0',
     marginBottom: 20,
     borderRadius: 30,
     borderWidth: 2,
@@ -86,11 +96,12 @@ const styles = StyleSheet.create({
     padding: 20,
     marginHorizontal: 25,
     marginTop: 20,
+    height: 180
   },
   cardTitle: {
-    fontSize: 21,
+    fontSize: 23,
     fontWeight: 'bold',
-    color: '#7743DB',
+    color: 'black',
     textAlign: 'center',
     textTransform: 'capitalize',
     marginBottom: 2,
@@ -100,47 +111,53 @@ const styles = StyleSheet.create({
   cardLocation: {
     fontSize: 16,
     fontWeight: '450',
-    color: '#7743DB',
-    textAlign: 'center'
+    color: 'black',
+    textAlign: 'center',
+    top: 5,
+    textTransform: 'capitalize'
+  },
+  locationAlignment: {
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
   cardDates: {
-    color: '#7743DB',
+    color: 'black',
+    fontWeight: '450',
     justifyContent: 'center',
     margin: 2,
     marginBottom: 7,
-    textAlign: 'center'
+    textAlign: 'center',
+    fontSize: 15,
+    top: 5,
+    left: 3,
   },
-  deleteButton: {
-    color: '#7743DB',
-    borderRadius: 5,
-    borderWidth: -3,
-    backgroundColor: '#F7EFE5',
-    borderColor: "#F7EFE5",
-    padding: 10,
-    marginRight: 250,
-    alignItems: 'center',
-    alignContent: 'center',
-    width: 38,
-    position: 'absolute',
-    bottom: 2,
-    right: 20,
-    height: 36,
-    elevation: 5
+  dateAlignment: {
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
-  viewTripButton: {
-    width: "80%",
+  buttonContainerDelete: {
+    flexDirection: 'row',
+    flex: 0,
+    gap: 10,
+    bottom: 70,
+    left: -5
+  }, 
+  buttonDelete: {
+    display: "flex", 
     backgroundColor: "#7743DB",
-    height: 40,
-    paddingTop: 10,
-    marginBottom: 10,
-    color: "white",
-    borderRadius: 2,
-    justifyContent: "center",
-    alignItems: "center",
-    textAlign: "center",
-    border: "1px solid #7743DB",
+    width: "50%", 
+    padding: 15,
+    paddingRight: 60,
     borderRadius: 10,
-    bottom: -10,
-    left: 33
+    alignItems: "center",
+    marginTop: 80,
+    height: 50,
+  },
+  buttonTextDelete: {
+    color: "white",
+    fontWeight: "700",
+    fontSize: 16,
+    left: "29%",
+    textAlign: 'center',
   },
 });

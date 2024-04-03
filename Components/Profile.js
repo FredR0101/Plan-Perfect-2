@@ -134,7 +134,7 @@ export const Profile = () => {
         <View style={styles.buttonContainer}>
           <Pressable style={styles.button} onPress={handleSubmit}>
             <Text style={styles.buttonText}>Update</Text>
-          </Pressable>
+          </Pressable>  
         </View>
         <View style={styles.buttonContainerDelete}>
           <Pressable style={styles.buttonDelete} onPress={handleSignout}>
