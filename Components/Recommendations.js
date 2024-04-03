@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { View, Text, FlatList, StyleSheet } from "react-native";
+import { View, Text, FlatList, StyleSheet, ActivityIndicator } from "react-native";
 import { db } from "../firebase";
 import { doc, getDocs, collection, query, where} from 'firebase/firestore';
 import * as React from 'react';
@@ -7,8 +7,10 @@ import { EventCard } from './EventCard.js';
 
 export const Recommendations = () => {
   const [events, setEvents] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
   
   useEffect(() => {
+    setIsLoading(true)
     const eventsRef = collection(db, "test-events")
     getDocs(eventsRef)
     .then(snapshot => {
@@ -17,10 +19,11 @@ export const Recommendations = () => {
         eventsArr.push({...doc.data(), id: doc.id})
       })
       setEvents(eventsArr)
+      setIsLoading(false)
     })
   }, [])
 
-  return (
+  return isLoading ? (<ActivityIndicator/>) : (
     <View style={styles.recommendationsPage}>
       <FlatList
         style={{ width: "90%", height: "70%", padding: "10%" }}
