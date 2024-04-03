@@ -5,14 +5,14 @@ import {
   Image,
   TextInput,
   Pressable,
-} from "react-native";
-import * as React from "react";
-import { auth } from "../firebase";
-import { useNavigation } from "@react-navigation/native";
-import { db } from "../firebase";
-import { collection, getDocs, query, where } from "firebase/firestore";
-import { useEffect, useState } from "react";
-import { updateDoc, doc, deleteDoc, deleteUser } from "firebase/firestore";
+  } from "react-native";
+  import * as React from "react";
+  import { auth } from "../firebase";
+  import { useNavigation } from "@react-navigation/native";
+  import { db } from "../firebase";
+  import { collection, getDocs, query, where } from "firebase/firestore";
+  import { useEffect, useState } from "react";
+  import { updateDoc, doc, deleteDoc, deleteUser } from "firebase/firestore";
 
 export const Profile = () => {
   const [user, setUser] = useState({});
@@ -129,7 +129,7 @@ export const Profile = () => {
           <TextInput
             style={styles.input}
             placeholder="Enter Bio"
-            value={bio}
+            value={bio || ""}
             onChangeText={setBio}
           />
           <View style={styles.buttonContainer}>
