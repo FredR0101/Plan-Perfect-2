@@ -146,6 +146,7 @@ export const Profile = () => {
           <Text style={styles.label}>Bio</Text>
           <TextInput
             style={styles.input}
+            multiline
             placeholder="Enter Bio"
             value={bio || ""}
             onChangeText={setBio}
