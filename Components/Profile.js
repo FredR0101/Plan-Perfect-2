@@ -13,6 +13,7 @@ import {
   import { collection, getDocs, query, where } from "firebase/firestore";
   import { useEffect, useState } from "react";
   import { updateDoc, doc, deleteDoc, deleteUser } from "firebase/firestore";
+  import { ActivityIndicator } from "react-native-web";
 
 export const Profile = () => {
   const [user, setUser] = useState({});
