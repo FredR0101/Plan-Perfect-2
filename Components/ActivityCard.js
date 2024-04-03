@@ -69,10 +69,10 @@ const ActivityCard = ({ activity, itineraryId, setUserItinerary }) => {
         {activity.name}
       </Text>
       <Text style={styles.activityInfo}>{activity.description}</Text>
-      <Text style={styles.activityInfo}> <Entypo name="location-pin" size={24} color="black" /> {activity.location} </Text>
-      <Text style={styles.activityInfo}> <Ionicons name="pricetags-outline" size={24} color="black" /> £{activity.price} </Text>
-      <Text style={styles.activityInfo}> <FontAwesome name="calendar-o" size={24} color="black" /> {activity.date} </Text>
-      <Text style={styles.activityInfo}> <FontAwesome6 name="people-group" size={24} color="black" /> {activity.people} </Text>
+      <Text style={styles.activityInfo}> <Entypo name="location-pin" size={24} color="#7743DB" /> {activity.location} </Text>
+      <Text style={styles.activityInfo}> <Ionicons name="pricetags-outline" size={24} color="#7743DB" /> £{activity.price} </Text>
+      <Text style={styles.activityInfo}> <FontAwesome name="calendar-o" size={24} color="#7743DB" /> {activity.date} </Text>
+      <Text style={styles.activityInfo}> <FontAwesome6 name="people-group" size={24} color="#7743DB" /> {activity.people} </Text>
       <View style={styles.btnContainer}>
         <Pressable onPress={() => handleUpdateButton(activity.name)}>
           <Text style={styles.btn}> Update Activity </Text>
