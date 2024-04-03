@@ -9,22 +9,7 @@ import { doc, getDocs, collection } from "firebase/firestore";
 
 export const SingleItineraryNav = ({route}) => {
     const Tab = createBottomTabNavigator();
-    // const [userItinerary, setUserItinerary] = useState([]);
-
-    // useEffect(() => {
-    //     const itineraryRef = collection(db, "test-activities");
-    //     getDocs(itineraryRef).then((snapshot) => {
-    //       const itinerary = [];
-    //       snapshot.docs.forEach((doc) => {
-    //         if (doc.id === itineraryId) {
-    //           itinerary.push({ ...doc.data(), id: doc.id });
-    //         }
-    //       });
-    //       setUserItinerary(itinerary);
-    //     });
-    //   }, []);
-
-    // console.log(userItinerary, '<<<in nav');
+  
     const tripId = route.params.params.itineraryId
 
     return (
