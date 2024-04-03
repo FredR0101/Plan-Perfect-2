@@ -6,6 +6,8 @@ import { doc, getDocs, collection } from "firebase/firestore";
 
 export const Itinerary = ({ route }) => {
   const itineraryId = route.params.itineraryId;
+  const itineraryName = route.params.itineraryName
+
   const [userItinerary, setUserItinerary] = useState([]);
   useEffect(() => {
     const itineraryRef = collection(db, "test-activities");
@@ -25,7 +27,7 @@ export const Itinerary = ({ route }) => {
     <View style={styles.itinerary}>
       <Text style={{ marginTop: "5%", fontSize: "120%", fontWeight: "bold" }}>
         {" "}
-        Trip{" "}
+        {itineraryName}{" "}
       </Text>
 
       {userItinerary.length === 0 ? 
