@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react";
-import { StyleSheet, Text, View, Pressable, FlatList } from "react-native";
+import { StyleSheet, Text, View, Pressable, FlatList, ActivityIndicator } from "react-native";
 import ActivityCard from "./ActivityCard";
 import { db } from "../firebase";
 import { doc, getDocs, collection } from "firebase/firestore";
 
 export const Itinerary = ({ route }) => {
+  const [isLoading, setIsLoading] = useState(false)
   const itineraryId = route.params.itineraryId;
   const itineraryName = route.params.itineraryName
 
   const [userItinerary, setUserItinerary] = useState([]);
   useEffect(() => {
+    setIsLoading(true)
     const itineraryRef = collection(db, "test-activities");
     getDocs(itineraryRef).then((snapshot) => {
       const itinerary = [];
@@ -19,11 +21,12 @@ export const Itinerary = ({ route }) => {
         }
       });
       setUserItinerary(itinerary);
+      setIsLoading(false)
     });
   }, [setUserItinerary]);
 
 
-  return (
+  return isLoading ? ( <ActivityIndicator/> ) : (
     <View style={styles.itinerary}>
       <Text style={{ marginTop: "5%", fontSize: "120%", fontWeight: "bold" }}>
         {" "}
@@ -42,7 +45,7 @@ export const Itinerary = ({ route }) => {
         />
       )}
     </View>
-  );
+  )
 };
 
 export const styles = StyleSheet.create({

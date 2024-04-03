@@ -5,6 +5,7 @@ import {
   StyleSheet,
   Pressable,
   ScrollView,
+  ActivityIndicator,
 } from "react-native";
 import { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
@@ -26,6 +27,7 @@ export const SingleEvent = ({
   const navigation = useNavigation();
   const [itineraryId, setItineraryId] = useState("first");
   const [itineraries, setItineraries] = useState([]);
+  const [isLoading, setIsLoading] = useState(true)
 
   const handleAddToItinerary = () => {
     const eventToAdd = { ...event };
@@ -44,6 +46,7 @@ export const SingleEvent = ({
   };
 
       useEffect(() => {
+        setIsLoading(true)
         const uid = auth.currentUser.uid;
         const fetchData = collection(db, "test-itineraries");
         const userQuery = query(fetchData, where("uid", "==", uid));
@@ -53,10 +56,11 @@ export const SingleEvent = ({
             itineraryData.push({ ...doc.data(), id: doc.id });
           });
           setItineraries(itineraryData);
+          setIsLoading(false)
         });
       }, []);
 
-  return (
+  return isLoading ? (<ActivityIndicator/>) : (
     <ScrollView style={styles.singleEventPage}>
       <Pressable
         onPress={() => navigation.navigate("Recommendations")}

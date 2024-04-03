@@ -5,6 +5,7 @@ import {
   Image,
   TextInput,
   Pressable,
+  ActivityIndicator,
 } from "react-native";
 import * as React from "react";
 import { auth } from "../firebase";
@@ -22,11 +23,13 @@ export const Profile = () => {
   const [avatar, setAvatar] = useState("");
 
   const navigation = useNavigation();
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
     const userEmail = auth.currentUser.email;
     const fetchData = collection(db, "test-users");
     const userQuery = query(fetchData, where("email", "==", userEmail));
+    setIsLoading(true)
     getDocs(userQuery)
       .then((usersData) => {
         let userData = {};
@@ -38,6 +41,7 @@ export const Profile = () => {
         setEmail(userData.email);
         setBio(userData.bio);
         setAvatar(userData.image);
+        setIsLoading(false)
       })
       .catch((err) => {
         throw err;
@@ -45,9 +49,11 @@ export const Profile = () => {
   }, [setUser, setName, setBio]);
 
   const handleSignout = () => {
+    setIsLoading(true)
     auth
       .signOut()
       .then(() => {
+        setIsLoading(false)
         navigation.replace("Login");
       })
       .catch((error) => alert(error.message));
@@ -57,6 +63,7 @@ export const Profile = () => {
     const uid = auth.currentUser.uid;
     const ref = doc(db, "test-users", uid);
 
+    setIsLoading(true)
     updateDoc(ref, { username: name, bio: bio })
       .then(() => {
         setUser((prevUser) => ({
@@ -64,6 +71,7 @@ export const Profile = () => {
           username: name,
           bio: bio,
         }));
+        setIsLoading(false)
         alert("Profile successfully updated");
       })
       .catch((err) => {
@@ -71,11 +79,13 @@ export const Profile = () => {
       });
   };
   const handleDocDelete = () => {
+    setIsLoading(true)
     const uid = auth.currentUser.uid;
     const userRef = doc(db, "test-users", uid);
     deleteDoc(userRef)
       .then(() => {
         handleDelete();
+        setIsLoading(false)
         alert("User deleted");
       })
       .catch((err) => {
@@ -83,16 +93,18 @@ export const Profile = () => {
       });
   };
   const handleDelete = () => {
+    setIsLoading(true)
     const user = auth.currentUser;
     deleteUser(user)
       .then(() => {
+        setIsLoading(false)
         navigation.replace("Login");
       })
       .catch((err) => {
         alert(err, "Something went wrong");
       });
   };
-  return (
+  return isLoading ? (<ActivityIndicator/>) : (
     <View style={styles.container}>
       <View style={styles.formContainer}>
         <View style={styles.avatarContainer}>
