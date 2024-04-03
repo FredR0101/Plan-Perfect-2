@@ -23,7 +23,7 @@ export const Itinerary = ({ route }) => {
       setUserItinerary(itinerary);
       setIsLoading(false)
     });
-  }, [setUserItinerary]);
+  }, [setUserItinerary, itineraryId]);
 
 
   return isLoading ? ( <ActivityIndicator/> ) : (
