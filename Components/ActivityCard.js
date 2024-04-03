@@ -49,17 +49,16 @@ const ActivityCard = ({ activity, itineraryId, setUserItinerary }) => {
     <View style={styles.activityCard}>
       <Image
         style={{
-          height: "50%",
+          height: 200,
           width: "100%",
-          border: "1px solid black",
-          borderRadius: "5%",
+          borderRadius: 10,
         }}
         source={{
           uri: activity.image,
         }}
       />
       <Text
-        style={{ textAlign: "center", fontWeight: "bold", paddingBottom: 5 }}
+        style={styles.activityName}
       >
         {activity.name}
       </Text>
@@ -70,52 +69,62 @@ const ActivityCard = ({ activity, itineraryId, setUserItinerary }) => {
       <Text style={styles.activityInfo}>
         Number of people: {activity.people}
       </Text>
-      <Pressable onPress={() => handleDeleteButton(activity.name)}>
-        <Text
-          style={{
-            backgroundColor: "#7743DB",
-            border: "1px solid #C3ACD0",
-            color: "white",
-            height: 30,
-            width: 100,
-            textAlign: "center",
-            marginTop: 10,
-            paddingTop: 5,
-          }}
-        >
-          Delete activity
-        </Text>
-      </Pressable>
-      <Pressable onPress={() => handleUpdateButton(activity.name)}>
-        <Text
-          style={{
-            backgroundColor: "#7743DB",
-            border: "1px solid #C3ACD0",
-            color: "white",
-            height: 30,
-            width: 150,
-            textAlign: "center",
-            marginTop: 10,
-            paddingTop: 5,
-          }}
-        >
-          Update Activity
-        </Text>
-      </Pressable>
+      <View style={styles.btnContainer}>
+        <Pressable onPress={() => handleUpdateButton(activity.name)}>
+          <Text style={styles.btn}> Update Activity </Text>
+        </Pressable>
+        <Pressable onPress={() => handleDeleteButton(activity.name)}>
+          <Text style={styles.btn}> Delete Activity </Text>
+        </Pressable>
+      </View>
     </View>
   );
 };
 
 export const styles = StyleSheet.create({
   activityCard: {
-    marginTop: 70,
-    border: "1px solid black",
-    backgroundColor: "#C3ACD0",
-    height: 400,
-    width: 500,
+    flex: 1,
+    marginTop: 50,
+    marginBottom: 30,
+    paddingBottom: 5,
+    backgroundColor: "#FFFBF5",
+    height: "300%",
+    padding: 15,
+    borderRadius: 10,
+    border: "1px solid #F7EFE5",
   },
+
+  activityName: {
+    paddingTop: 10,
+    paddingBottom: 20,
+    fontWeight: "bold",
+    fontSize: 20
+
+  },
+
   activityInfo: {
-    textAlign: "left",
+    paddingBottom: 20,
+    alignItems: "center",
   },
+
+  btnContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between"
+  },  
+
+  btn: {
+    width: "100%",
+    backgroundColor: "#7743DB",
+    height: 40,
+    paddingTop: 10,
+    marginBottom: 10,
+    color: "white",
+    borderRadius: 2,
+    justifyContent: "center",
+    alignItems: "center",
+    textAlign: "center",
+    border: "1px solid #7743DB",
+    borderRadius: 10,
+  }
 });
 export default ActivityCard;

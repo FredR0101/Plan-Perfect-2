@@ -45,10 +45,10 @@ export const Itinerary = ({ route }) => {
 
 export const styles = StyleSheet.create({
   itinerary: {
-    backgroundColor: "lightgrey",
     flex: 1,
     width: "100%",
     alignItems: "center",
-    border: "5px solid black",
+    justifyContent: "center",
+    backgroundImage: 'linear-gradient(to bottom right, transparent, #7743DB)',
   },
 });

@@ -10,13 +10,9 @@ import { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { RadioButton } from "react-native-paper";
 import { db } from "../firebase";
-import {
-  updateDoc,
-  collection,
-  doc,
-  getDocs,
-  arrayUnion,
-} from "firebase/firestore";
+import { updateDoc, collection, doc, getDocs, arrayUnion, query, where} from "firebase/firestore";
+import { auth } from "../firebase";
+
 
 export const SingleEvent = ({
   route: {
@@ -43,16 +39,18 @@ export const SingleEvent = ({
       });
   };
 
-  useEffect(() => {
-    const fetchData = collection(db, "test-itineraries");
-    getDocs(fetchData).then((data) => {
-      const itineraryData = [];
-      data.docs.forEach((doc) => {
-        itineraryData.push({ ...doc.data(), id: doc.id });
-      });
-      setItineraries(itineraryData);
-    });
-  }, []);
+      useEffect(() => {
+        const uid = auth.currentUser.uid;
+        const fetchData = collection(db, "test-itineraries");
+        const userQuery = query(fetchData, where("uid", "==", uid));
+        getDocs(userQuery).then((data) => {
+          const itineraryData = [];
+          data.docs.forEach((doc) => {
+            itineraryData.push({ ...doc.data(), id: doc.id });
+          });
+          setItineraries(itineraryData);
+        });
+      }, []);
 
   return (
     <ScrollView style={styles.singleEventPage}>

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { View, Text, TextInput, Pressable } from "react-native";
+import { View, Text, TextInput, Pressable, StyleSheet } from "react-native";
 import { DatePickerInput } from "react-native-paper-dates";
 import { db } from "../firebase";
 import { doc, updateDoc, arrayUnion, collection, getDocs } from "firebase/firestore";
@@ -62,29 +62,29 @@ export const AddActivity = ({tripId}) => {
   };
 
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <TextInput
+    <View style={styles.formContainer}>
+      <Text style={styles.headerTxt}> Please specify the activity details: </Text>
+      <TextInput style = {styles.input}
         placeholder="Name of the activity"
         onChange={(e) => {
           setActivityName(e.target.value);
         }}
       />
-      <TextInput
+      <TextInput style = {styles.input}
         placeholder="Describe the activity"
         onChange={(e) => {
           setDescription(e.target.value);
         }}
         multiline="true"
       />
-      <TextInput
+      <TextInput style = {styles.input}
         placeholder="Location"
         onChange={(e) => {
           setLocation(e.target.value);
         }}
       />
-      <View style={{ width: "70%" }}>
-        <DatePickerInput
-          style={{ fontSize: "80%" }}
+      <View>
+        <DatePickerInput style={styles.datePicker}
           locale="en-GB"
           label="Pick a date"
           value={inputDate}
@@ -92,47 +92,83 @@ export const AddActivity = ({tripId}) => {
           inputMode="start"
         />
       </View>
-      <TextInput
+      <TextInput style = {styles.input}
         placeholder="Enter the image url"
         onChange={(e) => {
           setImage(e.target.value);
         }}
         inputMode="url"
       />
-      <TextInput
+      <TextInput style = {styles.input}
         value={price}
         onChangeText={(e) => handleNumberChange(e, setPrice)}
         keyboardType="numeric"
         placeholder="Price in pounds"
       />
-      <TextInput
+      <TextInput style = {styles.input}
         placeholder="Number of people"
         value={peopleCount}
         onChangeText={(e) => handleNumberChange(e, setPeopleCount)}
         keyboardType="numeric"
       />
 
-      <Pressable onPress={handleSubmit}>
-        <Text>Submit</Text>
+      <Pressable style = {styles.btn} 
+        onPress={handleSubmit}>
+        <Text style={styles.btnText}> Add Activity </Text>
         {err ? (
-          <Text
-            style={{ border: "1px solid red", color: "red", marginTop: 10 }}
-          >
-            {err}
-          </Text>
+          <Text> {err} </Text>
         ) : (
-          <Text
-            style={{
-              color: "white",
-              marginTop: 10,
-              backgroundColor: "#7743DB",
-              border: "1px solid #C3ACD0",
-            }}
-          >
-            {msg}
-          </Text>
+          <Text> {msg} </Text>
         )}
       </Pressable>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  formContainer: { 
+    flex: 1,
+    marginTop: 50,
+    marginBottom: 30,
+    paddingBottom: 5,
+    backgroundColor: "#FFFBF5",
+    height: "300%",
+    padding: 15,
+    borderRadius: 10,
+    border: "1px solid #F7EFE5",
+  },
+
+  headerTxt: {
+    fontWeight: "bold",
+    marginBottom: "3%",
+  },
+
+  input: {
+    backgroundColor: "white",
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+    borderRadius: 10,
+    marginTop: 5,
+    },
+  
+  datePicker: {
+    marginTop: "3%",
+    fontSize: "80%",
+    backgroundColor: "white",
+    borderRadius: "5%,"
+  },
+
+  btn: {
+    marginTop: "5%",
+    backgroundColor: "#7743DB",
+    padding: 15,
+    borderRadius: 10,
+    alignItems: "center",
+    },
+
+  btnText: {
+    color: "white",
+    fontWeight: "700",
+    fontSize: 16,
+  },
+})
