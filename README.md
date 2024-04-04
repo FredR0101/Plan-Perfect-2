@@ -3,8 +3,6 @@
 ## Overview
 
 This is a mobile application built using React Native and Firebase. It offers a comprehensive set of features to enhance the user experience. 
-Mobile-view
-
 
 ## Authentication: 
 
@@ -23,7 +21,7 @@ Users can view all the itineraries in "My Trips" Page and clicking on each itine
 ## Single Itinerary Page:
 
 ### My Itinerary Page
-The single itinerary page leads the user to the 'My Itinerary page' where it lets the user  to view your own itinerary with activities displayed on the page, update or delete a single activity.
+The single itinerary page leads the user to the 'My Itinerary page' where it lets the user view your own itinerary with activities displayed on the page, update or delete a single activity.
 
 ### Add Activity Page
 The user could also add an activity to their existing itinerary in the Add Activity page. 
@@ -38,15 +36,15 @@ If the user wishes to add the event to their itinerary, they can do so by select
 
 
 
-# Profile section: 
-## My Profile:
+## Profile section: 
+### My Profile:
 Users can view and update their profiles, including personal information on My Profile Page. 
 
-## Sign Out and Delete Account: 
+### Sign Out and Delete Account: 
 
 Users can securely sign out of their accounts or delete their accounts if desired.
 
-## My Calendar:
+### My Calendar:
 The app automatically organizes and updates activities on a calendar based on the user's itinerary.
 
 This app aims to provide users with a seamless and intuitive experience for planning and managing their travel itineraries, with the added convenience of activity recommendations and calendar integration.
@@ -63,23 +61,25 @@ Firebase Firestore
 ## Installation
 
 
-1.Clone this repository to your local machine.
+1. Clone this repository to your local machine.
 
 git clone https://github.com/FredR0101/Plan-Perfect-2.git
 
-2.Navigate to the project directory.
+2. Navigate to the project directory.
 
 cd Plan-Perfect-2
 
-3.Install dependencies.
+3. Install dependencies.
 
 npm install/yarn install.
 
-4.Set up Firebase for your project by following the Firebase documentation.
+4. Create a "ApiKey.js" file and add following properties: 
 
-5.Add your Firebase configuration to the appropriate files (e.g., firebase.js).
+export const Key = "AIzaSyA_DgExC1Y3ZBuDjLwqqnBotzk_BagIIj4"
 
-6.Run the app using.
+5. Run the app using.
 
 npx expo start
+
+6. Inspect a page and choose a mobile view.
 
