@@ -69,10 +69,10 @@ const ActivityCard = ({ activity, itineraryId, setUserItinerary }) => {
         {activity.name}
       </Text>
       <Text style={styles.activityInfo}>{activity.description}</Text>
-      <Text style={styles.activityInfo}> <Entypo name="location-pin" size={24} color="#7743DB" /> {activity.location} </Text>
-      <Text style={styles.activityInfo}> <Ionicons name="pricetags-outline" size={24} color="#7743DB" /> £{activity.price} </Text>
-      <Text style={styles.activityInfo}> <FontAwesome name="calendar-o" size={24} color="#7743DB" /> {activity.date} </Text>
-      <Text style={styles.activityInfo}> <FontAwesome6 name="people-group" size={24} color="#7743DB" /> {activity.people} </Text>
+      <Text style={styles.activityInfo}> <Entypo name="location-pin" size={24} color="#7743DB" />    {activity.location} </Text>
+      <Text style={styles.activityInfo}> <Ionicons name="pricetags-outline" size={24} color="#7743DB" />    £{activity.price} </Text>
+      <Text style={styles.activityInfo}> <FontAwesome name="calendar-o" size={24} color="#7743DB" />    {activity.date} </Text>
+      <Text style={styles.activityInfo}> <FontAwesome6 name="people-group" size={24} color="#7743DB" />  {activity.people} </Text>
       <View style={styles.btnContainer}>
         <Pressable onPress={() => handleUpdateButton(activity.name)}>
           <Text style={styles.btn}> Update Activity </Text>
@@ -88,7 +88,7 @@ const ActivityCard = ({ activity, itineraryId, setUserItinerary }) => {
 export const styles = StyleSheet.create({
   activityCard: {
     flex: 1,
-    marginTop: 50,
+    marginTop: 10,
     marginBottom: 30,
     paddingBottom: 10,
     backgroundColor: "#FFFBF5",

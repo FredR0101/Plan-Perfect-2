@@ -20,7 +20,7 @@ export const EventCard = ({ event }) => {
           }}
         />
         <Text style={[styles.eventInfo, styles.eventName]}>{event.name}</Text>
-        <Text style={styles.eventInfo}> <Entypo name="location-pin" size={24} color="black" /> {event.location}</Text>
+        <Text style={styles.eventInfo}> <Entypo name="location-pin" size={24} color="#7743DB" /> {event.location}</Text>
         <Text style={styles.eventInfo}>
           {event.description && event.description.slice(0, 120)}...
         </Text>

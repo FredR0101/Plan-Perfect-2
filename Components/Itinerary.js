@@ -28,10 +28,12 @@ export const Itinerary = ({ route }) => {
 
   return isLoading ? ( <ActivityIndicator/> ) : (
     <View style={styles.itinerary}>
-      <Text style={{ marginTop: "5%", fontSize: "120%", fontWeight: "bold" }}>
-        {" "}
-        {itineraryName}{" "}
-      </Text>
+      <View style={styles.containerItineraryName}>
+        <Text style={styles.itineraryName}>
+          {" "}
+          {itineraryName}{" "}
+        </Text>
+      </View>
 
       {userItinerary.length === 0 ? 
         <Text> Empty Itinerary </Text>
@@ -56,4 +58,21 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundImage: 'linear-gradient(to bottom right, transparent, #7743DB)',
   },
+
+  containerItineraryName: {
+    backgroundColor: "white",
+    borderBottomColor: "black",
+    borderBottomWidth: "0.1px",
+    padding: 5,
+    // borderRadius: 10,
+    width: "100%",
+  },
+
+  itineraryName: { 
+    marginTop: "5%", 
+    fontSize: "140%", 
+    fontWeight: "bold",
+    color: "black",
+    textAlign: "center"
+  }
 });

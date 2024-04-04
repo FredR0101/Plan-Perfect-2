@@ -25,7 +25,7 @@ export const SingleEvent = ({
   },
 }) => {
   const navigation = useNavigation();
-  const [itineraryId, setItineraryId] = useState("first");
+  const [itineraryId, setItineraryId] = useState("");
   const [itineraries, setItineraries] = useState([]);
   const [isLoading, setIsLoading] = useState(true)
 
@@ -38,6 +38,7 @@ export const SingleEvent = ({
       activities: arrayUnion(eventToAdd),
     })
       .then(() => {
+        setItineraryId("")
         alert("Activity added to itinerary");
       })
       .catch(() => {
