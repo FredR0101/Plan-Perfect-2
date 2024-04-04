@@ -70,7 +70,7 @@ export const ItinerariesList = () => {
                 <View style={styles.buttonContainerDelete}>
               <Pressable style={styles.buttonDelete}
                 onPress={() => {
-                  navigation.navigate("Single Itinerary", {
+                  navigation.navigate("My Itinerary", {
                     screen: "My Itinerary",
                     params: {
                       itineraryId: data.id,

@@ -17,7 +17,7 @@ export const Navigation = () => {
           <Drawer.Screen name="My Trips" component={HomePage} />
           <Drawer.Screen name="Recommendations" component={Recommendations} />
           <Drawer.Screen name="Profile" component={MainProfile} />
-          <Drawer.Screen name="Single Itinerary" component={SingleItineraryNav} options={{drawerItemStyle: {height: 0}}} />
+          <Drawer.Screen name="My Itinerary" component={SingleItineraryNav} options={{drawerItemStyle: {height: 0}}} />
           <Drawer.Screen name="Single Event" component={SingleEvent} options={{drawerItemStyle: {height: 0}}} />
       </Drawer.Navigator>
     </>
