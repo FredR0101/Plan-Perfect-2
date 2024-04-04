@@ -34,6 +34,20 @@ export const ItinerariesList = () => {
     alert(err, 'Something went wrong')
    });
   };
+
+  function compare( a, b ) {
+    if ( a.startDate < b.startDate ){
+      return -1;
+    }
+    if ( a.startDate > b.startDate ){
+      return 1;
+    }
+    return 0;
+  }
+  if(itinerary.length){
+    itinerary.sort( compare );
+  }
+
   return (
     <>
       <ScrollView style={styles.background}>

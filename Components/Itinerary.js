@@ -25,6 +25,20 @@ export const Itinerary = ({ route }) => {
     });
   }, [setUserItinerary, itineraryId]);
 
+  
+  function compare( a, b ) {
+    if ( a.date < b.date ){
+      return -1;
+    }
+    if ( a.date > b.date ){
+      return 1;
+    }
+    return 0;
+  }
+
+if(userItinerary[0]){
+  userItinerary[0].activities.sort( compare );
+}
 
   return isLoading ? ( <ActivityIndicator/> ) : (
     <View style={styles.itinerary}>
@@ -44,7 +58,7 @@ export const Itinerary = ({ route }) => {
           renderItem={({ item: activity }) => (
             <ActivityCard activity={activity} setUserItinerary = {setUserItinerary} itineraryId ={itineraryId} />
           )}
-        />
+        />   
       )}
     </View>
   )
