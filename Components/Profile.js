@@ -12,7 +12,7 @@ import {
   import { db } from "../firebase";
   import { collection, getDocs, query, where } from "firebase/firestore";
   import { useEffect, useState } from "react";
-  import { updateDoc, doc, deleteDoc, deleteUser } from "firebase/firestore";
+  import { updateDoc, doc, deleteDoc } from "firebase/firestore";
   import { ActivityIndicator } from "react-native-web";
 
 export const Profile = () => {
@@ -99,15 +99,17 @@ export const Profile = () => {
       });
   };
   const handleDelete = () => {
-    setIsLoading(true)
+    setIsLoading(true);
     const user = auth.currentUser;
-    deleteUser(user)
+    user.delete()
       .then(() => {
-        setIsLoading(false)
+        setIsLoading(false);
         navigation.replace("Login");
       })
-      .catch((err) => {
-        alert(err, "Something went wrong");
+      .catch((error) => {
+        setIsLoading(false);
+        console.error("Error deleting user:", error);
+        alert("Something went wrong while deleting user.");
       });
   };
   return isLoading ? (<ActivityIndicator/>) : (
