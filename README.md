@@ -2,7 +2,7 @@
 
 ## Overview
 
-This is a mobile application built using React Native and Firebase. It offers a comprehensive set of features to enhance the user experience. 
+A React-Native/Expo front-end based mobile app that utilises Firebase authentication and Firebase Firestore as a back-end to create a user experience. Plan Perfect is a holiday organisation tool, giving the user the option to create travel itineraries for any vacation they wish to have, with ease, whislt remaining local to their own profile.
 
 ## Authentication: 
 
